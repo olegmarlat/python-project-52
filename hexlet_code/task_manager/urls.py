@@ -17,10 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from . import task_manager
+from hexlet_code.task_manager import task_manager
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(task_manager.urls))
+    path('', include('task_manager.urls'))
 ]
