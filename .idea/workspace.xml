@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a8d8a2d-56ad-4259-8bf1-93dc8e35e039" name="Changes" comment="settings modifed">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/hexlet_code/task_manager/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763814419465</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="settings modifed">
+      <option name="closed" value="true" />
+      <created>1763844960134</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763844960134</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
