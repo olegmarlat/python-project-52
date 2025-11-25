@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a8d8a2d-56ad-4259-8bf1-93dc8e35e039" name="Changes" comment="settings modifed" />
+    <list default="true" id="7a8d8a2d-56ad-4259-8bf1-93dc8e35e039" name="Changes" comment="settings modifed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/static/css/dashboard.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/static/css/product.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/urls.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,18 +85,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.HTML&quot;
   }
 }</component>
-  <component name="QodanaHighlightedReportService">
-    <option name="localRunNotPublishedPersistedInfo">
-      <LocalReportPersistedInfo>
-        <option name="path" value="/tmp/qodana_output/qodana.sarif.json" />
-        <option name="reportGuid" value="1f4e32e8-5240-4279-910a-c20ac982203f" />
-        <option name="reportName" value="python-project-52/qodana/2025-11-22" />
-      </LocalReportPersistedInfo>
-    </option>
-  </component>
-  <component name="QodanaIsSelectedPersistenceService">
-    <option name="selectedOrLoading" value="true" />
-  </component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="/tmp/qodana_output/qodana.sarif.json" reportGuid="1f4e32e8-5240-4279-910a-c20ac982203f" reportId="python-project-52/qodana/2025-11-22" />
