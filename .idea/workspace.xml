@@ -6,25 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7a8d8a2d-56ad-4259-8bf1-93dc8e35e039" name="Changes" comment="settings modifed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/build.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/static/css/dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/static/css/product.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/task_manager/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hexlet_code/task_manager/urls.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,22 +50,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.settings.executor&quot;: &quot;Run&quot;,
-    &quot;Python.urls.executor&quot;: &quot;Run&quot;,
-    &quot;Python.views.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/olegl/PycharmProjects/pythonProject/python-project-52&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.HTML&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests in tests.py.executor": "Debug",
+    "Python.manage.executor": "Run",
+    "Python.settings.executor": "Run",
+    "Python.urls.executor": "Run",
+    "Python.views.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/olegl/PycharmProjects/pythonProject/python-project-52",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "preferences.sourceCode.HTML"
   }
-}</component>
+}]]></component>
   <component name="QodanaReportsService">
     <option name="descriptions">
       <ReportDescription localRun="true" path="/tmp/qodana_output/qodana.sarif.json" reportGuid="1f4e32e8-5240-4279-910a-c20ac982203f" reportId="python-project-52/qodana/2025-11-22" />
@@ -150,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763845561796</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="settings modifed">
+      <option name="closed" value="true" />
+      <created>1764088269406</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764088269406</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
