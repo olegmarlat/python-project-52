@@ -1,12 +1,12 @@
-from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from ..task_manager.userss.models import CustomUser
 from .models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'first_name', 'last_name', 'phone', 'date_of_birth')
+        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'date_of_birth']
 
 
 class CustomUserUpdateForm(UserChangeForm):
@@ -14,4 +14,4 @@ class CustomUserUpdateForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'first_name', 'last_name', 'phone', 'date_of_birth', 'is_active')
+        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'date_of_birth', 'is_active']

@@ -11,12 +11,14 @@ from django.contrib import messages
 def home(request):
     return render(request, 'home.html')
 
+
 def user_list(request):
     users = User.objects.all().order_by('id')
-    return render(request, 'users/user_list.html', {'users':users})
+    return render(request, 'users/user_list.html', {'users': users})
 
 
 """Регистрация нового пользователя"""
+
 
 def register(request):
     if request.method == 'POST':
@@ -25,11 +27,12 @@ def register(request):
         email = request.POST.get('email')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        if User.objects.filter(username=username).exists():  # проверка на наличие пользователя
+        # проверка на наличие пользователя
+        if User.objects.filter(username=username).exists():
             messages.error(request, "Пользователь уже существует!")
             return render(request, 'users/register.html')
         # зарегистрируем нового пользователя
-        user = User.objects.create_user(
+        users = User.objects.create_user(
             username=username,
             password=password,
             email=email,
@@ -47,7 +50,6 @@ def user_login(request):
         password = request.POST.get('password')
         # проверка
         user = authenticate(request, username=username, password=password)
-        
         if user is not None:
             login(request, user)
             messages.success(request, f'Добро пожаловать, {username}!')
@@ -72,7 +74,6 @@ def user_edit(request, user_id):
     if not request.user.is_staff and request.user.id != user.id:
         messages.error(request, "Упс, у вас нет прав!")
         return redirect(user_list)
-    
     if request.method == "POST":
         user.username = request.POST.get('username')
         user.email = request.POST.get('email')
@@ -85,12 +86,11 @@ def user_edit(request, user_id):
         new_password = request.POST.get('new_password')
         if new_password:
             user.set_password(new_password)
-        
-        user.save()
-        
-        messages.success(request, f'Данные пользователя {user.username} обновлены!')
+            user.save()
+            messages.success(request, f'Данные  {user.username} обновлены!')
         return redirect('user_list')
     return render(request, 'users/user_edit.html', {'user': user})
+
 
 @login_required
 def user_delete(request, user_id):
