@@ -1,28 +1,26 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
-
-from . import FormStyleMixin
-from . import User
+from django.views.generic import ListView, CreateView
+# from . import FormStyleMixin
+from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    ListView,
-    UpdateView,
-)
+from django.shortcuts import render
 
-from . import (
-    CustomLoginRequiredMixin,
-    ProtectErrorMixin,
-    UserPermissionMixin,
-)
-from . import (
-    CustomUserChangeForm,
-    CustomUserCreationForm,
-)
+
+def index(request):
+    return render(request, 'users/index.html')
+# from . import (
+#    CustomLoginRequiredMixin,
+#   ProtectErrorMixin,
+#   UserPermissionMixin,
+# )
+# from . import (
+#    CustomUserChangeForm,
+#    CustomUserCreationForm,
+# )
 
 
 class UserListView(ListView):
@@ -41,7 +39,7 @@ class BaseUserView(SuccessMessageMixin):
 
 
 class UserCreateView(BaseUserView, CreateView):
-    form_class = CustomUserCreationForm
+    form_class = UserCreationForm
     success_url = reverse_lazy("login")
     success_message = _('User was registered successfully')
     extra_context = {
@@ -50,9 +48,10 @@ class UserCreateView(BaseUserView, CreateView):
     }
 
 
+'''
 class UserUpdateView(CustomLoginRequiredMixin, UserPermissionMixin,
                      BaseUserView, UpdateView):
-    form_class = CustomUserChangeForm
+    form_class = UserChangeForm
     success_url = reverse_lazy('users:index')
     success_message = _('User was updated successfully')
     permission_denied_message = _(
@@ -83,6 +82,7 @@ class UserDeleteView(CustomLoginRequiredMixin, UserPermissionMixin,
         'title': _('User deletion'),
         'button_name': _('Yes, delete')
     }
+'''
 
 
 class BaseUserForm:
@@ -96,6 +96,13 @@ class BaseUserForm:
                 'Letters, digits and @/./+/-/_ only.'
             ),
         }
+
+
+class FormStyleMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
 
 
 class CustomUserCreationForm(FormStyleMixin, UserCreationForm):

@@ -14,9 +14,9 @@ urlpatterns = [
     # path('logout/', views.user_logout, name='logout'),
     # path('users/<int:user_id>/edit/', views.user_edit, name='user_edit'),
     # path('users/<int:user_id>/delete/', views.user_delete, name='user_delete
-    path('login/', views.UserLoginView.as_view(), name='login'),
-    path('logout/', views.UserLogoutView.as_view(), name='logout'),
+    # path('login/', views.UserLoginView.as_view(), name='login'),
+    # path('logout/', views.UserLogoutView.as_view(), name='logout'),
     path('create/', views.UserCreateView.as_view(), name='create'),
-    path('update/', views.UserUpdateView.as_view(), name='update'),
-    path('profile/', views.profile, name='profile'),
+    # path('update/', views.UserUpdateView.as_view(), name='update'),
+    # path('profile/', views.profile, name='profile'),
 ]
