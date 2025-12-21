@@ -21,6 +21,14 @@ from django.views.generic import TemplateView
 
 # from task_manager.views import CustomLoginView, CustomLogoutView
 
+from . import views
+
+urlpatterns = [
+    path('', views.status_list, name='status_list'),
+    path('create/', views.status_create, name='status_create'),
+    path('update/<int:pk>/', views.status_update, name='status_update'),
+    path('delete/<int:pk>/', views.status_delete, name='status_delete'),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
