@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
-import sys
-
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -48,6 +46,8 @@ INSTALLED_APPS = [
     "task_manager",
     "users",
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -154,4 +154,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = '/users/'
 LOGOUT_REDIRECT_URL = '/users/'
 
-AUTH_USER_MODEL = 'users.CustomUser'
+
