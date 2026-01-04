@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from labels.models import Label
 
 
 class Task(models.Model):
@@ -7,6 +8,7 @@ class Task(models.Model):
     description = models.TextField(blank=True, verbose_name="Описание")
     status = models.ForeignKey('statuses.Status', on_delete=models.PROTECT, verbose_name="Статус")
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    labels = models.ManyToManyField(Label, blank=True)
 
     def __str__(self):
         return self.name

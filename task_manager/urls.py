@@ -19,11 +19,6 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 
-# from task_manager.views import CustomLoginView, CustomLogoutView
-
-from . import views
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
@@ -32,6 +27,6 @@ urlpatterns = [
     # path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('users/', include('users.urls')),
     path('statuses/', include('statuses.urls')),
-    # path('labels/', include('task_manager.labels.urls')),
+    path('labels/', include('labels.urls')),
     path('tasks/', include('tasks.urls')),
 ]

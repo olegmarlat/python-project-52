@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_bootstrap5",
+    "django_filters",
     "task_manager",
     "users",
     "statuses",
     "tasks",
+    "labels",
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -156,5 +158,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/users/'
 LOGOUT_REDIRECT_URL = '/users/'
-
-

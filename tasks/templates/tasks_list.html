@@ -1,27 +1,47 @@
-<!-- templates/tasks/tasks_list.html -->
-{% extends 'base.html' %}
+<!-- templates/tasks/task_list.html -->
+{% extends "base.html" %}
+{% load bootstrap5 %}
+
 {% block content %}
-<div class="container mt-4">
-  <h2>Задачи</h2>
-  <a href="{% url 'task_create' %}" class="btn btn-primary mb-3">➕ Новая задача</a>
-  
-  {% if tasks %}
-    <div class="list-group">
-      {% for task in tasks %}
-        <div class="list-group-item">
-          <h5>{{ task.name }}</h5>
-          <p>{{ task.description|default:"Нет описания" }}</p>
-          <small>Автор: {{ task.author.username }} | Статус: {{ task.status.name }}</small>
-          
-          <div class="mt-2">
-            <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-warning">✏️ Редактировать</a>
-            <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">🗑️ Удалить</a>
-          </div>
-        </div>
-      {% endfor %}
+<h1>Задачи</h1>
+
+<!-- Форма фильтрации -->
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-3">
+    {{ filterset.form.status|bootstrap5 }}
+  </div>
+  <div class="col-md-3">
+    {{ filterset.form.executor|bootstrap5 }}
+  </div>
+  <div class="col-md-3">
+    {{ filterset.form.labels|bootstrap5 }}
+  </div>
+  <div class="col-md-3">
+    <div class="form-check">
+      {{ filterset.form.self_tasks }}
+      <label class="form-check-label" for="{{ filterset.form.self_tasks.id_for_label }}">
+        Только мои задачи
+      </label>
     </div>
-  {% else %}
-    <p>Нет задач.</p>
-  {% endif %}
-</div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Применить</button>
+    <a href="{% url 'tasks_list' %}" class="btn btn-secondary">Сбросить</a>
+  </div>
+</form>
+
+<!-- Список задач -->
+{% for task in tasks %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h5>{{ task.name }}</h5>
+      <p>Статус: {{ task.status }} | Автор: {{ task.author }} | Исполнитель: {{ task.executor|default:"Не назначен" }}</p>
+      {% if task.labels.all %}
+        Метки: {% for label in task.labels.all %}<span class="badge bg-secondary">{{ label }}</span> {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+{% empty %}
+  <p>Нет задач.</p>
+{% endfor %}
 {% endblock %}
