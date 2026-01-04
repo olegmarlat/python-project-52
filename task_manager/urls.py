@@ -23,12 +23,6 @@ from django.views.generic import TemplateView
 
 from . import views
 
-urlpatterns = [
-    path('', views.status_list, name='status_list'),
-    path('create/', views.status_create, name='status_create'),
-    path('update/<int:pk>/', views.status_update, name='status_update'),
-    path('delete/<int:pk>/', views.status_delete, name='status_delete'),
-]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,7 +31,7 @@ urlpatterns = [
     # path('login/', CustomLoginView.as_view(), name='login'),
     # path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('users/', include('users.urls')),
-    # path('statuses/', include('task_manager.statuses.urls')),
+    path('statuses/', include('statuses.urls')),
     # path('labels/', include('task_manager.labels.urls')),
-    # path('tasks/', include('task_manager.tasks.urls')),
+    path('tasks/', include('tasks.urls')),
 ]
