@@ -28,4 +28,3 @@ class ProtectErrorMixin:
         except IntegrityError:
             messages.error(request, self.protected_object_message)
             return redirect(self.protected_object_url)
-        
