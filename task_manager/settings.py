@@ -19,16 +19,16 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't')
+DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-5xy=&ua8w+3p9p3*#k^x_7=3sv1(*w%9+ejyjwx_)cu#2h@8&0"
+SECRET_KEY = (
+    "django-insecure-5xy=&ua8w+3p9p3*#k^x_7=3sv1(*w%9+ejyjwx_)cu#2h@8&0"
+)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 
 ALLOWED_HOSTS = ["webserver", "127.0.0.1", "localhost"]
 
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     "django_filters",
 ]
 
-AUTH_USER_MODEL = 'users.user'
+AUTH_USER_MODEL = "users.user"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -66,19 +66,19 @@ MIDDLEWARE = [
 
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'rollbar': {
-            'level': 'ERROR',
-            'class': 'rollbar.logger.RollbarHandler',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "rollbar": {
+            "level": "ERROR",
+            "class": "rollbar.logger.RollbarHandler",
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['rollbar'],
-            'level': 'ERROR',
-            'propagate': False,
+    "loggers": {
+        "django": {
+            "handlers": ["rollbar"],
+            "level": "ERROR",
+            "propagate": False,
         },
     },
 }
@@ -104,10 +104,10 @@ TEMPLATES = [
 
 
 ROLLBAR = {
-    'access_token': '4039038d5f5a4224a8932d6c2106f5ac',
-    'environment': 'development' if DEBUG else 'production',
-    'code_version': '1.0',
-    'root': BASE_DIR,
+    "access_token": "4ROLLBAR_ACCESS_TOKEN",
+    "environment": "development" if DEBUG else "production",
+    "code_version": "1.0",
+    "root": BASE_DIR,
 }
 
 WSGI_APPLICATION = "task_manager.wsgi.application"
@@ -126,9 +126,9 @@ else:
             "ENGINE": "django.db.backends.postgresql",
             "NAME": os.getenv("DB_NAME"),
             "USER": os.getenv("DB_USER"),
-            "PASSWORD": os.getenv('DB_PASSWORD'),
-            "HOST": os.getenv('DB_HOST', 'localhost'),
-            "PORT": os.getenv("DB_PORT", '5432'),
+            "PASSWORD": os.getenv("DB_PASSWORD"),
+            "HOST": os.getenv("DB_HOST", "localhost"),
+            "PORT": os.getenv("DB_PORT", "5432"),
         }
     }
 # Password validation
@@ -178,6 +178,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = '/users/login/'
-LOGIN_REDIRECT_URL = '/users/'
-LOGOUT_REDIRECT_URL = '/users/'
+LOGIN_URL = "/users/login/"
+LOGIN_REDIRECT_URL = "/users/"
+LOGOUT_REDIRECT_URL = "/users/"

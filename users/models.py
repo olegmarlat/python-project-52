@@ -7,7 +7,7 @@ class User(AbstractUser):
     first_name = models.CharField(_("first name"), max_length=150, blank=False)
     last_name = models.CharField(_("last name"), max_length=150, blank=False)
 
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f"{self.first_name} {self.last_name}"

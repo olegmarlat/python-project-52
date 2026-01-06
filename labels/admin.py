@@ -4,6 +4,6 @@ from .models import Label
 
 @admin.register(Label)
 class LabelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
-    search_fields = ['name']
-    list_filter = ['created_at']
+    list_display = ("name", "created_at")
+    search_fields = ["name"]
+    list_filter = ["created_at"]

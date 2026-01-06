@@ -6,30 +6,36 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('labels', '0001_initial'),
-        ('statuses', '0001_initial'),
-        ('tasks', '0001_initial'),
+        ("labels", "0001_initial"),
+        ("statuses", "0001_initial"),
+        ("tasks", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='task',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="task",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='task',
-            name='labels',
-            field=models.ManyToManyField(blank=True, to='labels.label'),
+            model_name="task",
+            name="labels",
+            field=models.ManyToManyField(blank=True, to="labels.label"),
         ),
         migrations.AddField(
-            model_name='task',
-            name='status',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='statuses.status', verbose_name='Статус'),
+            model_name="task",
+            name="status",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                to="statuses.status",
+                verbose_name="Статус",
+            ),
         ),
     ]

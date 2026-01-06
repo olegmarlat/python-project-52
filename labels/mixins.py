@@ -7,5 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     def handle_no_permission(self):
-        messages.error(self.request, _("You must be logged in to access this page."))
-        return redirect('login')
+        messages.error(
+            self.request, _("You must be logged in to access this page.")
+        )
+        return redirect("login")

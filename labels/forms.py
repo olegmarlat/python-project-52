@@ -4,13 +4,12 @@ from .models import Label
 
 
 class LabelCreationForm(forms.ModelForm):
-
     class Meta:
         model = Label
-        fields = ['name']
+        fields = ["name"]
         labels = {
-            'name': _('Name'),
+            "name": _("Name"),
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            "name": forms.TextInput(attrs={"class": "form-control"}),
         }

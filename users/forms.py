@@ -5,7 +5,14 @@ from users.models import User
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'date_of_birth']
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "phone",
+            "date_of_birth",
+        ]
 
 
 class CustomUserUpdateForm(UserChangeForm):
@@ -13,4 +20,12 @@ class CustomUserUpdateForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'date_of_birth', 'is_active']
+        fields = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "phone",
+            "date_of_birth",
+            "is_active",
+        ]
