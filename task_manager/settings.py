@@ -19,7 +19,7 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -36,6 +36,10 @@ ALLOWED_HOSTS = ["webserver", "127.0.0.1", "localhost"]
 # Application definition
 
 INSTALLED_APPS = [
+    "users",
+    "statuses",
+    "tasks",
+    "labels",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,14 +48,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_bootstrap5",
     "django_filters",
-    "task_manager",
-    "users",
-    "statuses",
-    "tasks",
-    "labels",
 ]
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.user'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -62,7 +61,27 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "rollbar.contrib.django.middleware.RollbarNotifierMiddleware",
 ]
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'rollbar': {
+            'level': 'ERROR',
+            'class': 'rollbar.logger.RollbarHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['rollbar'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 
 ROOT_URLCONF = "task_manager.urls"
 
@@ -83,12 +102,16 @@ TEMPLATES = [
     },
 ]
 
+
+ROLLBAR = {
+    'access_token': '4039038d5f5a4224a8932d6c2106f5ac',
+    'environment': 'development' if DEBUG else 'production',
+    'code_version': '1.0',
+    'root': BASE_DIR,
+}
+
 WSGI_APPLICATION = "task_manager.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
 if DEBUG:
     DATABASES = {

@@ -7,6 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
+def trigger_error(request):
+    raise Exception("Тестовая ошибка для Rollbar")
+
+
 def home(request):
     return render(request, 'home.html')
 

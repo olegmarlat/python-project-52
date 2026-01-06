@@ -8,9 +8,9 @@ from django.views.generic import (
     UpdateView,
 )
 
-from . import LabelCreationForm
-from . import Label
-from . import (
+from .forms import LabelCreationForm
+from .models import Label
+from task_manager.mixins import (
     CustomLoginRequiredMixin,
     ProtectErrorMixin,
 )
