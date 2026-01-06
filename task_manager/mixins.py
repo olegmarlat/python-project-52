@@ -11,9 +11,7 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
     redirect_field_name = None
 
     def handle_no_permission(self):
-        messages.error(
-            self.request, _("You must be logged in to access this page.")
-        )
+        messages.error(self.request, _("You must be logged in to access this page."))
         return redirect(self.login_url)
 
 
@@ -28,3 +26,20 @@ class ProtectErrorMixin:
         except IntegrityError:
             messages.error(request, self.protected_object_message)
             return redirect(self.protected_object_url)
+
+
+class UserPermissionMixin:
+    permission_denied_message = "You don't have rights to change another user."
+    permission_denied_url = reverse_lazy("users:index")
+
+    def dispatch(self, request, *args, **kwargs):
+        # Получаем целевого пользователя (обычно через self.get_object())
+        target_user = self.get_object()
+
+        # Проверяем: текущий пользователь == целевой ИЛИ суперпользователь
+        if request.user == target_user or request.user.is_superuser:
+            return super().dispatch(request, *args, **kwargs)
+
+        # Если нет доступа — показываем сообщение и редиректим
+        messages.error(request, self.permission_denied_message)
+        return redirect(self.permission_denied_url)

@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from . import FormStyleMixin
 from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
@@ -14,7 +13,7 @@ from task_manager.mixins import (
     ProtectErrorMixin,
     UserPermissionMixin,
 )
-from . import (
+from .forms import (
     CustomUserChangeForm,
     CustomUserCreationForm,
 )
@@ -56,7 +55,8 @@ class UserUpdateView(
     form_class = CustomUserChangeForm
     success_url = reverse_lazy("users:index")
     success_message = _("User was updated successfully")
-    permission_denied_message = _("You don't have rights to change another user.")
+    permission_denied_message = _("You don't have rights"
+                                  "to change another user.")
     extra_context = {
         "title": _("Edit profile"),
         "button_name": _("Save changes"),
@@ -73,10 +73,12 @@ class UserDeleteView(
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("User was deleted successfully")
-    permission_denied_message = _("You don't have rights to change another user.")
+    permission_denied_message = _("You don't have rights "
+                                  "to change another user.")
     access_denied_message = _("You don't have rights to change another user.")
     protected_object_url = reverse_lazy("users:index")
-    protected_object_message = _("Cannot delete this user because they are being used")
+    protected_object_message = _("Cannot delete this user"
+                                 "because they are being used")
     extra_context = {
         "title": _("User deletion"),
         "button_name": _("Yes, delete"),
@@ -111,12 +113,14 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):  # noqa: F811
         fields = (*BaseUserForm.Meta.fields, "password1", "password2")
         help_texts = {
             **BaseUserForm.Meta.help_texts,
-            "password1": _("Your password must contain at least 3 characters."),
+            "password1": _("Your password must contain "
+                           "at least 3 characters."),
             "password2": _("Please enter your password again to confirm."),
         }
 
     def clean(self):
-        """Validate password length and equality (only if both fields are filled)."""
+        """Validate password length and equality "
+        (only if both fields are filled)."""
         cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
@@ -138,7 +142,10 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):  # noqa: F811
             elif len(password1) < 3:
                 self.add_error(
                     "password2",
-                    _("This password is too short. It must contain at least 3 characters."),
+                    _(
+                        "This password is too short. It must contain "
+                        "at least 3 characters."
+                    ),
                 )
 
         return cleaned_data
