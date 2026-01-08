@@ -25,10 +25,8 @@ DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-5xy=&ua8w+3p9p3*#k^x_7=3sv1(*w%9+ejyjwx_)cu#2h@8&0"
-)
 
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 ALLOWED_HOSTS = ["webserver", "127.0.0.1", "localhost"]
 
