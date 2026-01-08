@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a8d8a2d-56ad-4259-8bf1-93dc8e35e039" name="Changes" comment="settings modifed">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statuses/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statuses/templates/status_confirm_delete.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statuses/templates/status_form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statuses/templates/status_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/labels/label_delete.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/labels/label_form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/users/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/users/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/users/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/users/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/users/user_confirm_delete.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/users/user_edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/templates/users/user_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/task_manager/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_manager/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/task_confirm_delete.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/task_form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks/templates/tasks_list.html" beforeDir="false" />
-    </list>
+    <list default="true" id="7a8d8a2d-56ad-4259-8bf1-93dc8e35e039" name="Changes" comment="settings modifed" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -202,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765023760746</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="settings modifed">
+      <option name="closed" value="true" />
+      <created>1767861570945</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1767861570946</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

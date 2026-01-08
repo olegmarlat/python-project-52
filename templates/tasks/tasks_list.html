@@ -1,0 +1,47 @@
+<!-- templates/tasks/task_list.html -->
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h1>Задачи</h1>
+
+<!-- Форма фильтрации -->
+<form method="get" class="row g-3 mb-4">
+  <div class="col-md-3">
+    {{ filterset.form.status|bootstrap5 }}
+  </div>
+  <div class="col-md-3">
+    {{ filterset.form.executor|bootstrap5 }}
+  </div>
+  <div class="col-md-3">
+    {{ filterset.form.labels|bootstrap5 }}
+  </div>
+  <div class="col-md-3">
+    <div class="form-check">
+      {{ filterset.form.self_tasks }}
+      <label class="form-check-label" for="{{ filterset.form.self_tasks.id_for_label }}">
+        Только мои задачи
+      </label>
+    </div>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Применить</button>
+    <a href="{% url 'tasks_list' %}" class="btn btn-secondary">Сбросить</a>
+  </div>
+</form>
+
+<!-- Список задач -->
+{% for task in tasks %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h5>{{ task.name }}</h5>
+      <p>Статус: {{ task.status }} | Автор: {{ task.author }} | Исполнитель: {{ task.executor|default:"Не назначен" }}</p>
+      {% if task.labels.all %}
+        Метки: {% for label in task.labels.all %}<span class="badge bg-secondary">{{ label }}</span> {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+{% empty %}
+  <p>Нет задач.</p>
+{% endfor %}
+{% endblock %}

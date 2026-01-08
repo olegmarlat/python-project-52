@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}Редактирование пользователя{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Редактирование: {{ user.username }}</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Имя пользователя *</label>
+                        <input type="text" class="form-control" name="username" value="{{ user.username }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" value="{{ user.email }}">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Имя</label>
+                            <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Фамилия</label>
+                            <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Новый пароль</label>
+                        <input type="password" class="form-control" name="new_password" placeholder="Оставьте пустым, чтобы не менять">
+                        <div class="form-text">Введите новый пароль только если хотите его изменить</div>
+                    </div>
+                    
+                    {% if request.user.is_staff %}
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="is_staff" id="is_staff" {% if user.is_staff %}checked{% endif %}>
+                            <label class="form-check-label" for="is_staff">
+                                Staff статус (администратор)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="is_active" id="is_active" {% if user.is_active %}checked{% endif %}>
+                            <label class="form-check-label" for="is_active">
+                                Активный пользователь
+                            </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        <a href="{% url 'user_list' %}" class="btn btn-secondary">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

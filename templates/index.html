@@ -1,0 +1,68 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Менеджер задач</title>
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+  <style>
+    /* Убираем отступы и рамки у навигации */
+    .navbar {
+      padding: 0.5rem 1rem;
+      background-color: #f8f9fa !important;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .navbar-brand,
+    .nav-link {
+      font-weight: bold;
+      color: #333 !important;
+      text-decoration: none;
+    }
+
+    .navbar-brand:hover,
+    .nav-link:hover {
+      text-decoration: underline;
+      color: #007bff !important;
+    }
+
+    .navbar-nav .nav-item {
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Навигационная панель (как на образце) -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'users:index' %}">Менеджер задач</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:index' %}">Пользователи</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Вход</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:create' %}">Регистрация</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Основной контент -->
+  <div class="container mt-4">
+    <h1>Добро пожаловать в Менеджер задач!</h1>
+    <p>Используйте навигацию сверху, чтобы перейти к нужному разделу.</p>
+  </div>
+
+  {% bootstrap_javascript %}
+</body>
+</html>
