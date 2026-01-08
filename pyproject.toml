@@ -27,7 +27,13 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["task_manager"]
+packages = [
+    "task_manager",
+    "users",
+    "statuses",
+    "labels",
+    "tasks",
+    ]
 
 [tool.setuptools.package-data]
 "*" = ["*.txt", "*.html", "*.css", "*.js", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.svg"]
