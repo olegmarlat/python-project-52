@@ -27,6 +27,7 @@ DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
 if not SECRET_KEY:
     raise ValueError("The DJANGO_SECRET_KEY environment variable is not set!")
 
