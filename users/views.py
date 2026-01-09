@@ -127,7 +127,7 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):  # noqa: F811
 
         # Если оба поля пустые — пропускаем валидацию
         if not password1 and not password2:
-            return cleaned_data
+            return None
 
         # Если заполнено только одно поле
         if password1 and not password2:
