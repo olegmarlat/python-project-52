@@ -5,17 +5,15 @@ from django.contrib.auth.models import User
 
 class UserTests(TestCase):
     def setUp(self):
-        """Подготовка перед каждым тестом"""
         self.client = Client()
-
-        # Создаем обычного пользователя
         self.user = User.objects.create_user(
-            username="testuser", password="testpass123"
+            username="testuser",
+            password="testpass123"
         )
-
-        # Создаем администратора
         self.admin = User.objects.create_user(
-            username="admin", password="adminpass123", is_staff=True
+            username="admin",
+            password="adminpass123",
+            is_staff=True
         )
 
     def test_user_creation(self):
