@@ -12,9 +12,6 @@ dev-install:
 build:
     ./build.sh
 
-render-start:
-    gunicorn task_manager.wsgi
-
 migrate:
 	$(MANAGE) migrate
 
@@ -41,7 +38,7 @@ test:
 coverage:
 	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=$(SETTINGS) --reuse-db
 	uv run coverage report --show-missing --skip-covered
-	uv run coverage html  # генерирует отчёт в htmlcov/
+	uv run coverage html
 
 ci-install:
 	uv sync --group dev
