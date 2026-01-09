@@ -4,15 +4,14 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=olegmarlat_python-project-52&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=olegmarlat_python-project-52)
 [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-highlight.svg)](https://sonarcloud.io/summary/new_code?id=olegmarlat_python-project-52)
 
-# Task manager  
+# Менеджер задач
+### Описание проекта
 
-### Project Description
 
-# Task Manager
 
 Менеджер задач - это учебный проект, созданный для управления пользователями задач в соответствии с CRUD (создание, чтение, изменение и удаление).
 
-## Функционал
+### Функционал
 
 - авторизация и подтверждение пользователя
 - управление задачами
@@ -20,7 +19,7 @@
 - применение ярлыков (labels) для классификации
 - поддержка интернационализации (i18n)
 
-## Применяемые технологии
+### Применяемые технологии
 
 - Python 3.11+
 - Django 5.2
