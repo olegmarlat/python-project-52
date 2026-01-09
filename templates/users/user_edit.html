@@ -15,23 +15,23 @@
                     {% csrf_token %}
                     
                     <div class="mb-3">
-                        <label class="form-label">Имя пользователя *</label>
-                        <input type="text" class="form-control" name="username" value="{{ user.username }}" required>
+                        <label for="id_username" class="form-label">Имя пользователя *</label>
+                        <input id="id_username" type="text" class="form-control" name="username" value="{{ user.username }}" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" value="{{ user.email }}">
+                        <label for="id_email" class="form-label">Email</label>
+                        <input id="id_email" type="email" class="form-control" name="email" value="{{ user.email }}">
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Имя</label>
-                            <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+                            <label for="id_first_name" class="form-label">Имя</label>
+                            <input id="id_first_name" type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Фамилия</label>
-                            <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
+                            <label for="id_last_name" class="form-label">Фамилия</label>
+                            <input id="id_last_name" type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
                         </div>
                     </div>
                     
