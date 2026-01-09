@@ -20,6 +20,7 @@ from .forms import (
 
 
 User = get_user_model()
+USERS_INDEX_URL = "users:index"
 
 
 def index(request):
@@ -39,7 +40,7 @@ class BaseUserView(SuccessMessageMixin):
     model = User
     template_name = "users/registration_form.html"
     context_object_name = "user"
-    permission_denied_url = reverse_lazy("users:index")
+    permission_denied_url = reverse_lazy(USERS_INDEX_URL)
 
 
 class UserCreateView(BaseUserView, CreateView):
@@ -53,7 +54,7 @@ class UserUpdateView(
     CustomLoginRequiredMixin, UserPermissionMixin, BaseUserView, UpdateView
 ):
     form_class = CustomUserChangeForm
-    success_url = reverse_lazy("users:index")
+    success_url = reverse_lazy(USERS_INDEX_URL)
     success_message = _("User was updated successfully")
     permission_denied_message = _("You don't have rights"
                                   "to change another user.")
@@ -76,7 +77,7 @@ class UserDeleteView(
     permission_denied_message = _("You don't have rights "
                                   "to change another user.")
     access_denied_message = _("You don't have rights to change another user.")
-    protected_object_url = reverse_lazy("users:index")
+    protected_object_url = reverse_lazy(USERS_INDEX_URL)
     protected_object_message = _("Cannot delete this user"
                                  "because they are being used")
     extra_context = {
