@@ -125,17 +125,17 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):  # noqa: F811
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 
-        # Если оба поля пустые — пропускаем валидацию
+        # Пропускаем валидацию, если оба поля пустые
         if not password1 and not password2:
-            return None
+            return cleaned_data
 
-        # Если заполнено только одно поле
+        # Проверяем заполненность обоих полей
         if password1 and not password2:
             self.add_error("password2", _("Please confirm your new password."))
         elif password2 and not password1:
             self.add_error("password1", _("Please enter a new password."))
 
-        # Если оба заполнены — проверяем совпадение и длину
+        # Если оба поля заполнены — проверяем совпадение и длину
         if password1 and password2:
             if password1 != password2:
                 self.add_error("password2", _("Passwords don't match."))
