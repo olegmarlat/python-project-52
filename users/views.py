@@ -119,8 +119,7 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):  # noqa: F811
         }
 
     def clean(self):
-        """Validate password length and equality "
-        (only if both fields are filled)."""
+        """Validate password length and equality."""
         cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
@@ -142,10 +141,8 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):  # noqa: F811
             elif len(password1) < 3:
                 self.add_error(
                     "password2",
-                    _(
-                        "This password is too short. It must contain "
-                        "at least 3 characters."
-                    ),
+                    _("This password is too short."
+                      "It must contain at least 3 characters.")
                 )
 
         return cleaned_data

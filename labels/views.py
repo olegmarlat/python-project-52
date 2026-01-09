@@ -7,13 +7,15 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-
 from .forms import LabelCreationForm
 from .models import Label
 from task_manager.mixins import (
     CustomLoginRequiredMixin,
     ProtectErrorMixin,
 )
+
+
+LABELS_INDEX_URL = 'labels:index'
 
 
 class LabelListView(CustomLoginRequiredMixin, ListView):
@@ -29,7 +31,7 @@ class LabelCreateView(
     model = Label
     template_name = "labels/label_form.html"
     form_class = LabelCreationForm
-    success_url = reverse_lazy("labels:index")
+    success_url = reverse_lazy(LABELS_INDEX_URL)
     success_message = _("Label was created successfully")
     extra_context = {"title": _("Create label"), "button_name": _("Create")}
 
@@ -40,7 +42,7 @@ class LabelUpdateView(
     form_class = LabelCreationForm
     model = Label
     template_name = "labels/label_form.html"
-    success_url = reverse_lazy("labels:index")
+    success_url = reverse_lazy(LABELS_INDEX_URL)
     success_message = _("Label was updated successfully")
     extra_context = {"title": _("Update label"), "button_name": _("Update")}
 
@@ -53,9 +55,9 @@ class LabelDeleteView(
 ):
     template_name = "labels/label_delete.html"
     model = Label
-    success_url = reverse_lazy("labels:index")
+    success_url = reverse_lazy(LABELS_INDEX_URL)
     success_message = _("Label was deleted successfully")
-    protected_object_url = reverse_lazy("labels:index")
+    protected_object_url = reverse_lazy(LABELS_INDEX_URL)
     protected_object_message = _(
         "Cannot delete this label because it is being used"
     )
