@@ -1,6 +1,6 @@
 .env
-.pyc
-.venv
+*.pyc
+.venv/
 .idea
 # Byte-compiled / optimized / DLL files
 __pycache__/
