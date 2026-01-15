@@ -27,10 +27,11 @@ DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 # SECURITY WARNING: keep the secret key used in production secret!
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-
 if not SECRET_KEY:
-    raise ValueError("The DJANGO_SECRET_KEY environment variable is not set!")
-
+    if os.getenv("CI") or os.getenv("GITHUB_ACTIONS") or os.getenv("HEXLET_ENV"):
+        SECRET_KEY = "insecure-secret-key-for-ci-only-do-not-use-in-production"
+    else:
+        raise ValueError("The DJANGO_SECRET_KEY environment variable is not set!")
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
