@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         DJANGO_SETTINGS_MODULE: task_manager.settings
 
     steps:
