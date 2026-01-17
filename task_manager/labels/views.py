@@ -13,6 +13,8 @@ from task_manager.mixins import (
     CustomLoginRequiredMixin,
     ProtectErrorMixin,
 )
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
 LABELS_INDEX_URL = 'labels:index'
@@ -65,3 +67,11 @@ class LabelDeleteView(
         "title": _("Label deletion"),
         "button_name": _("Yes, delete"),
     }
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # 🔥 Проверяем, используется ли метка в задачах
+        if self.object.task_set.exists():
+            messages.error(request, "Невозможно удалить метку, потому что она используется")
+            return redirect(self.success_url)
+        return super().post(request, *args, **kwargs)
