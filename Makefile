@@ -22,14 +22,14 @@ collectstatic:
 	$(MANAGE) collectstatic --noinput
 
 run:
-	$(MANAGE) runserver 0.0.0.0:8000
+    uv run python manage.py runserver
 
 
 lint:
-	uv run ruff check .
+	uv run ruff check
 
 lint-fix:
-	uv run ruff check --fix .
+	uv run ruff check --fix
 
 
 test:
@@ -45,6 +45,7 @@ ci-install:
 
 ci-migrate:
 	$(MANAGE) migrate --noinput
+	uv run python manage.py makemigrations --noinput && \
 
 ci-test:
 	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=$(SETTINGS) --reuse-db
