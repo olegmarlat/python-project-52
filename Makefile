@@ -45,7 +45,7 @@ ci-install:
 
 ci-migrate:
 	$(MANAGE) migrate --noinput
-	uv run python manage.py makemigrations --noinput && \
+	uv run python manage.py makemigrations --noinput
 
 ci-test:
 	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=$(SETTINGS) --reuse-db
