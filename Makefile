@@ -10,7 +10,7 @@ dev-install:
 	uv sync --group dev
 
 build:
-    ./build.sh
+	./build.sh
 
 migrate:
 	$(MANAGE) migrate
@@ -52,5 +52,3 @@ ci-test:
 	uv run coverage report --show-missing --skip-covered
 
 .PHONY: install dev-install migrate makemigrations collectstatic run lint lint-fix test coverage ci-install ci-migrate ci-test
-
-

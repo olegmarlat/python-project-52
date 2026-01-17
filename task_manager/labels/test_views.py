@@ -1,9 +1,42 @@
 from django.urls import reverse_lazy
-from . import Task
-from . import Label
-from . import LabelTestCase
+from task_manager.tasks.models import Task
+from task_manager.labels.models import Label
+from django.test import TestCase
+from task_manager.users.models import User
+from task_manager.statuses.models import Status 
 
 
+class LabelTestCase(TestCase):
+    def setUp(self):
+        # Создаём пользователей
+        self.user1 = User.objects.create_user(
+            username='user1',
+            password='password123',
+            first_name='User',
+            last_name='One'
+        )
+        self.user2 = User.objects.create_user(
+            username='user2',
+            password='password456',
+            first_name='User',
+            last_name='Two'
+        )
+
+        # Создаём статус (нужен для задачи в test_cannot_delete_label_in_use)
+        self.status = Status.objects.create(name="Новый")
+
+        # Создаём метки
+        self.label1 = Label.objects.create(name="Метка 1")
+        self.label2 = Label.objects.create(name="Метка 2")
+
+        # Считаем количество меток
+        self.label_count = Label.objects.count()
+
+        # Данные для создания и обновления метки
+        self.valid_label_data = {"name": "Новая метка"}
+        self.update_label_data = {"name": "Обновлённая метка"}
+        
+        
 class TestLabelListView(LabelTestCase):
     def test_labels_list_authorized(self):
         user1 = self.user1
@@ -132,19 +165,19 @@ class TestLabelDeleteView(LabelTestCase):
         self.assertRedirects(response, reverse_lazy("login"))
 
 
-def test_cannot_delete_label_in_use(self):
-    # Создаём задачу и привязываем метку
-    task = Task.objects.create(
-        name="Задача",
-        author=self.user1,
-        status=self.status,  # предполагается, что status есть в setUp
-    )
-    task.labels.add(self.label1)
+    def test_cannot_delete_label_in_use(self):
+        task = Task.objects.create(
+            name="Задача",
+            author=self.user1,
+            status=self.status,
+        )
+        task.labels.add(self.label1)
 
-    self.client.force_login(self.user1)
-    response = self.client.post(
-        reverse_lazy("labels:delete", kwargs={"pk": self.label1.id})
-    )
-    self.assertEqual(Label.objects.count(), 1)
-    self.assertTrue(Label.objects.filter(id=self.label1.id).exists())
-    self.assertRedirects(response, reverse_lazy("labels:index"))
+        self.client.force_login(self.user1)
+        response = self.client.post(
+            reverse_lazy("labels:delete", kwargs={"pk": self.label1.id})
+        )
+        self.assertEqual(Label.objects.count(), 1)
+        self.assertTrue(Label.objects.filter(id=self.label1.id).exists())
+        self.assertRedirects(response, reverse_lazy("labels:index"))
+    
