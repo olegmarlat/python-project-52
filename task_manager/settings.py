@@ -33,10 +33,10 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 INSTALLED_APPS = [
-    "users",
-    "statuses",
-    "tasks",
-    "labels",
+    "task_manager.users",
+    "task_manager.statuses",
+    "task_manager.tasks",
+    "task_manager.labels",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
