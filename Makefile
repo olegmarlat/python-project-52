@@ -22,7 +22,7 @@ collectstatic:
 	$(MANAGE) collectstatic --noinput
 
 run:
-    uv run python manage.py runserver
+	uv run python manage.py runserver
 
 
 lint:
