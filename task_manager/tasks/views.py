@@ -9,18 +9,12 @@ from .filters import TaskFilter
 
 
 @login_required
-def tasks_list(request):
-    tasks = Task.objects.select_related("author", "status").all()
-    return render(request, "tasks/tasks_list.html", {"tasks": tasks})
-
-
-@login_required
 def task_create(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
-            task.author = request.user  # ← автоматически ставим автора
+            task.author = request.user
             task.save()
             messages.success(request, "Задача успешно создана!")
             return redirect("tasks_list")
@@ -70,7 +64,7 @@ class TaskListView(LoginRequiredMixin, ListView):
         self.filterset = TaskFilter(
             self.request.GET,
             queryset=queryset,
-            request=self.request,  # ← передаём request, чтобы использовать в filter_self_tasks
+            request=self.request,
         )
         return self.filterset.qs
 

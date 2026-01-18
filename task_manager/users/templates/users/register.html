@@ -15,28 +15,33 @@
                     {% csrf_token %}
                     
                     <div class="mb-3">
-                        <label for="username" class="form-label">Имя пользователя *</label>
-                        <input type="text" class="form-control" id="username" name="username" required>
+                        <label for="{{ form.username.id_for_label }}" class="form-label">Имя пользователя *</label>
+                        {{ form.username|bootstrap_field }}
                     </div>
                     
                     <div class="mb-3">
-                        <label for="password" class="form-label">Пароль *</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="{{ form.password1.id_for_label }}" class="form-label">Пароль *</label>
+                        {{ form.password1|bootstrap_field }}
                     </div>
                     
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <label for="{{ form.password2.id_for_label }}" class="form-label">Подтверждение пароля *</label>
+                        {{ form.password2|bootstrap_field }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                        {{ form.email|bootstrap_field }}
                     </div>
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="first_name" class="form-label">Имя</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name">
+                            <label for="{{ form.first_name.id_for_label }}" class="form-label">Имя</label>
+                            {{ form.first_name|bootstrap_field }}
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="last_name" class="form-label">Фамилия</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name">
+                            <label for="{{ form.last_name.id_for_label }}" class="form-label">Фамилия</label>
+                            {{ form.last_name|bootstrap_field }}
                         </div>
                     </div>
                     

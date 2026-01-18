@@ -9,13 +9,10 @@ class UserTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user(
-            username="testuser",
-            password="testpass123"
+            username="testuser", password="testpass123"
         )
         self.admin = User.objects.create_user(
-            username="admin",
-            password="adminpass123",
-            is_staff=True
+            username="admin", password="adminpass123", is_staff=True
         )
 
     def test_user_creation(self):
@@ -23,21 +20,25 @@ class UserTests(TestCase):
         # Проверяем, что страница регистрации доступна
         response = self.client.get(reverse("users:create"))
         self.assertEqual(response.status_code, 200)
-        
+
         # Создаем пользователя
         response = self.client.post(
             reverse("users:create"),
             {
                 "username": "newuser",
-                "password1": "newpass123",  # Обрати внимание: password1 и password2
+                "first_name": "New",
+                "last_name": "User",
+                "password1": "newpass123",
                 "password2": "newpass123",
                 "email": "new@example.com",
             },
         )
+        # Добавь проверку редиректа
+        self.assertRedirects(response, reverse("login"))
 
         # Проверяем редирект на страницу входа
         self.assertRedirects(response, reverse("login"))
-        
+
         # Проверяем, что пользователь создался
         self.assertTrue(User.objects.filter(username="newuser").exists())
 
@@ -59,11 +60,11 @@ class UserTests(TestCase):
         response = self.client.post(
             reverse("users:update", args=[self.user.id]),
             {
-                "username": "updateduser", 
+                "username": "updateduser",
                 "email": "updated@example.com",
                 # Добавь другие обязательные поля, если есть
                 "first_name": "Test",
-                "last_name": "User"
+                "last_name": "User",
             },
         )
 
