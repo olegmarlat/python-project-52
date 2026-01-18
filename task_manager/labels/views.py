@@ -11,7 +11,6 @@ from .forms import LabelCreationForm
 from .models import Label
 from task_manager.mixins import (
     CustomLoginRequiredMixin,
-    ProtectErrorMixin,
 )
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -52,26 +51,31 @@ class LabelUpdateView(
 class LabelDeleteView(
     CustomLoginRequiredMixin,
     SuccessMessageMixin,
-    ProtectErrorMixin,
-    DeleteView,
+    DeleteView,  # Убрали ProtectErrorMixin, будем делать свою проверку
 ):
     template_name = "labels/label_delete.html"
     model = Label
     success_url = reverse_lazy(LABELS_INDEX_URL)
     success_message = _("Label was deleted successfully")
-    protected_object_url = reverse_lazy(LABELS_INDEX_URL)
-    protected_object_message = _(
-        "Cannot delete this label because it is being used"
-    )
     extra_context = {
         "title": _("Label deletion"),
         "button_name": _("Yes, delete"),
     }
-    
+
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        # 🔥 Проверяем, используется ли метка в задачах
-        if self.object.task_set.exists():
-            messages.error(request, "Невозможно удалить метку, потому что она используется")
+        # Получаем метку
+        label = self.get_object()
+
+        # Проверяем, используется ли метка в задачах
+        if label.task_set.exists():
+            messages.error(
+                request,
+                _("Cannot delete this label because it is being used")
+            )
             return redirect(self.success_url)
-        return super().post(request, *args, **kwargs)
+        # Если метка не используется, удаляем
+        success_message = self.get_success_message(label)
+        if success_message:
+            messages.success(request, success_message)
+        label.delete()
+        return redirect(self.success_url)
