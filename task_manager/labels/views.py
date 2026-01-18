@@ -15,8 +15,7 @@ from task_manager.mixins import (
 from django.contrib import messages
 from django.shortcuts import redirect
 
-
-LABELS_INDEX_URL = 'labels:index'
+LABELS_INDEX_URL = "labels:index"
 
 
 class LabelListView(CustomLoginRequiredMixin, ListView):
@@ -26,9 +25,7 @@ class LabelListView(CustomLoginRequiredMixin, ListView):
     ordering = ["id"]
 
 
-class LabelCreateView(
-    CustomLoginRequiredMixin, SuccessMessageMixin, CreateView
-):
+class LabelCreateView(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Label
     template_name = "labels/label_form.html"
     form_class = LabelCreationForm
@@ -37,9 +34,7 @@ class LabelCreateView(
     extra_context = {"title": _("Create label"), "button_name": _("Create")}
 
 
-class LabelUpdateView(
-    CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView
-):
+class LabelUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = LabelCreationForm
     model = Label
     template_name = "labels/label_form.html"
@@ -62,15 +57,19 @@ class LabelDeleteView(
         "button_name": _("Yes, delete"),
     }
 
+    def post(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
-        # Проверка использования метки в задачах
-        if self.object.task_set.exists():
+
+        from task_manager.tasks.models import Task
+
+        if Task.objects.filter(labels=self.object).exists():
             messages.error(
                 request,
                 _("Cannot delete this label because it is being used")
             )
             return redirect(self.success_url)
 
-        # Если метка не используется, выполняем стандартное удаление
         return super().delete(request, *args, **kwargs)
