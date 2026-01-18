@@ -51,7 +51,7 @@ class LabelUpdateView(
 class LabelDeleteView(
     CustomLoginRequiredMixin,
     SuccessMessageMixin,
-    DeleteView,  # Убрали ProtectErrorMixin, будем делать свою проверку
+    DeleteView,
 ):
     template_name = "labels/label_delete.html"
     model = Label
@@ -62,20 +62,15 @@ class LabelDeleteView(
         "button_name": _("Yes, delete"),
     }
 
-    def post(self, request, *args, **kwargs):
-        # Получаем метку
-        label = self.get_object()
-
-        # Проверяем, используется ли метка в задачах
-        if label.task_set.exists():
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # Проверка использования метки в задачах
+        if self.object.task_set.exists():
             messages.error(
                 request,
                 _("Cannot delete this label because it is being used")
             )
             return redirect(self.success_url)
-        # Если метка не используется, удаляем
-        success_message = self.get_success_message(label)
-        if success_message:
-            messages.success(request, success_message)
-        label.delete()
-        return redirect(self.success_url)
+
+        # Если метка не используется, выполняем стандартное удаление
+        return super().delete(request, *args, **kwargs)
