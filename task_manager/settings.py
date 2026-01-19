@@ -29,7 +29,7 @@ DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 if not SECRET_KEY:
     SECRET_KEY = "django-insecure-ci-dev-key-change-in-production"
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "webserver"]
 
 
 INSTALLED_APPS = [
