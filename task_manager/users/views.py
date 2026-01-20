@@ -6,6 +6,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.shortcuts import render
+from django.contrib.auth.views import LoginView
+from django.contrib import messages
+from .forms import CustomAuthenticationForm
 
 
 from task_manager.mixins import (
@@ -200,3 +203,15 @@ class CustomUserChangeForm(FormStyleMixin, forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class CustomLoginView(LoginView):
+    """Login view with success message and custom form."""
+
+    form_class = CustomAuthenticationForm
+    template_name = "registration/login.html"
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, _("Вы залогинены"))
+        return response
