@@ -213,5 +213,5 @@ class CustomLoginView(LoginView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, _("Вы залогинены"))
+        messages.success(self.request, "Вы залогинены")
         return response
