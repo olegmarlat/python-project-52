@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 
 load_dotenv()
@@ -109,8 +110,10 @@ ROLLBAR = {
 }
 
 WSGI_APPLICATION = "task_manager.wsgi.application"
-DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
-
+# DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 if DATABASE_URL.startswith("sqlite"):
     DATABASES = {
         "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)
