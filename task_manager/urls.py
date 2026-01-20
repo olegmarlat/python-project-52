@@ -18,6 +18,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.contrib.auth import views as auth_views
+from task_manager.users.forms import CustomAuthenticationForm
 
 
 urlpatterns = [
@@ -28,5 +30,13 @@ urlpatterns = [
     path("labels/", include("task_manager.labels.urls")),
     path("tasks/", include("task_manager.tasks.urls")),
     path("test-rollbar/", views.trigger_error),
-    path('login/', LoginView.as_view(), name='login'),
+    path(
+        "login/",
+        auth_views.LoginView.as_view(
+            form_class=CustomAuthenticationForm,
+            template_name="registration/login.html"
+        ),
+        name="login"
+    ),
+
 ]
