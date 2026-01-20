@@ -19,7 +19,8 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
+DEBUG = True
+# DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -108,8 +109,17 @@ ROLLBAR = {
 }
 
 WSGI_APPLICATION = "task_manager.wsgi.application"
+DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 
-
+if DATABASE_URL.startswith("sqlite"):
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    }
+else:
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=not DEBUG)
+    }
+"""
 if DEBUG:
     DATABASES = {
         "default": {
@@ -128,6 +138,7 @@ else:
             "PORT": os.getenv("DB_PORT", "5432"),
         }
     }
+"""
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
