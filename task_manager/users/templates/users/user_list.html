@@ -6,7 +6,7 @@
 <div class="d-flex justify-content between align-items-center mb-4">
     <h1>Список пользователей</h1>
     {% if user.is_authenticated and user.is_staff %}
-        <a href="{% url "register" %}" class="btn btn-success">
+        <a href="{% url "users:register" %}" class="btn btn-success">
             <i class="bi bi-person-plus"></i>Создать пользователя
         </a>
     {% endif %}
