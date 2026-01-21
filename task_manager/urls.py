@@ -11,7 +11,6 @@ urlpatterns = [
     path("statuses/", include("task_manager.statuses.urls")),
     path("labels/", include("task_manager.labels.urls")),
     path("tasks/", include("task_manager.tasks.urls")),
-    path("test-rollbar/", views.trigger_error),
     path("login/", CustomLoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     ]

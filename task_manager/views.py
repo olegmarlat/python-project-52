@@ -7,7 +7,3 @@ User = get_user_model()
 
 def index(request):
     return render(request, "index.html")
-
-
-def trigger_error(request):
-    raise RuntimeError("Тестовая ошибка для Rollbar")
