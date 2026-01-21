@@ -4,6 +4,9 @@ from django.contrib.auth import views as auth_views
 from . import views
 from task_manager.users.views import UserCreateView, CustomLoginView
 
+
+app_name = users
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
