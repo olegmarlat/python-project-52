@@ -18,5 +18,15 @@
       "username": "daenerys_t",
       "password": "Dracarys123"
     }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "first_name": "Arya",
+      "last_name": "Stark",
+      "username": "arya_stark",
+      "password": "Needle123"
+    }
   }
 ]
