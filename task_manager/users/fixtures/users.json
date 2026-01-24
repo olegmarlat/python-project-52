@@ -6,7 +6,7 @@
       "first_name": "John",
       "last_name": "Snow",
       "username": "john_snow",
-      "password": "Stark123"
+      "password": "pbkdf2_sha256$1000000$YwWMyhogiGnW3VTJZiCmEx$gLzmC+wqPO3yW75iIqi4PJ088bANWdyY6Zn9FKNAHWU="
     }
   },
   {
@@ -16,7 +16,7 @@
       "first_name": "Daenerys",
       "last_name": "Targaryen",
       "username": "daenerys_t",
-      "password": "Dracarys123"
+      "password": "pbkdf2_sha256$1000000$sY4oMbxSi7GeebmHk3q6W9$l2qhLNzEfmKqfTwHxPfAR/i2f5w7lccL9ECeJDZJvr4="
     }
   },
   {
@@ -26,7 +26,7 @@
       "first_name": "Arya",
       "last_name": "Stark",
       "username": "arya_stark",
-      "password": "Needle123"
+      "password": "pbkdf2_sha256$1000000$B9nTa6LDut6ZUjdoWjHyXM$qTqzyCBwtDuvKQPGoEEaFe6VbxYsr42qe2gbWcvZpr4="
     }
   }
 ]
