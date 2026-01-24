@@ -51,7 +51,7 @@ class BaseUserView(SuccessMessageMixin):
 class UserCreateView(BaseUserView, CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")
-    success_message = _("User was registered successfully")
+    success_message = _("Пользователь успешно зарегистрирован")
     extra_context = {"title": _("Sign Up"), "button_name": _("Register")}
 
 
@@ -60,7 +60,7 @@ class UserUpdateView(
 ):
     form_class = CustomUserChangeForm
     success_url = reverse_lazy(USERS_INDEX_URL)
-    success_message = _("User was updated successfully")
+    success_message = _("Пользователь успешно изменён")
     permission_denied_message = _("You don't have rights"
                                   "to change another user.")
     extra_context = {
@@ -78,7 +78,7 @@ class UserDeleteView(
 ):
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
-    success_message = _("User was deleted successfully")
+    success_message = _("Пользователь успешно удалён")
     permission_denied_message = _("You don't have rights "
                                   "to change another user.")
     access_denied_message = _("You don't have rights to change another user.")
