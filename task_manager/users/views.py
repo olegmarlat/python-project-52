@@ -9,6 +9,8 @@ from django.shortcuts import render
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
 from .forms import CustomAuthenticationForm
+from django.contrib.auth.views import LogoutView as BaseLogoutView
+from django.shortcuts import redirect
 
 
 from task_manager.mixins import (
@@ -215,3 +217,14 @@ class CustomLoginView(LoginView):
         response = super().form_valid(form)
         messages.success(self.request, "Вы залогинены")
         return response
+
+
+class CustomLogoutView(BaseLogoutView):
+    def dispatch(self, request, *args, **kwargs):
+        # Выход из системы
+        from django.contrib.auth import logout
+        logout(request)
+        # сообщение об успешном выходе
+        messages.success(request, _("You have been logged out successfully"))
+        # переход на главную
+        return redirect('/')
