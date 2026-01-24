@@ -6,7 +6,10 @@
       "first_name": "John",
       "last_name": "Snow",
       "username": "john_snow",
-      "password": "pbkdf2_sha256$1000000$YwWMyhogiGnW3VTJZiCmEx$gLzmC+wqPO3yW75iIqi4PJ088bANWdyY6Zn9FKNAHWU="
+      "password": "pbkdf2_sha256$1000000$YwWMyhogiGnW3VTJZiCmEx$gLzmC+wqPO3yW75iIqi4PJ088bANWdyY6Zn9FKNAHWU=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
     }
   },
   {
@@ -16,7 +19,10 @@
       "first_name": "Daenerys",
       "last_name": "Targaryen",
       "username": "daenerys_t",
-      "password": "pbkdf2_sha256$1000000$sY4oMbxSi7GeebmHk3q6W9$l2qhLNzEfmKqfTwHxPfAR/i2f5w7lccL9ECeJDZJvr4="
+      "password": "pbkdf2_sha256$1000000$sY4oMbxSi7GeebmHk3q6W9$l2qhLNzEfmKqfTwHxPfAR/i2f5w7lccL9ECeJDZJvr4=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
     }
   },
   {
@@ -26,7 +32,10 @@
       "first_name": "Arya",
       "last_name": "Stark",
       "username": "arya_stark",
-      "password": "pbkdf2_sha256$1000000$B9nTa6LDut6ZUjdoWjHyXM$qTqzyCBwtDuvKQPGoEEaFe6VbxYsr42qe2gbWcvZpr4="
+      "password": "pbkdf2_sha256$1000000$B9nTa6LDut6ZUjdoWjHyXM$qTqzyCBwtDuvKQPGoEEaFe6VbxYsr42qe2gbWcvZpr4=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
     }
   },
   {
@@ -36,7 +45,10 @@
       "first_name": "Lawrence",
       "last_name": "Kulas",
       "username": "lawrence_k",
-      "password": "pbkdf2_sha256$1000000$fakehashforlawrence$l2qhLNzEfmKqfTwHxPfAR/i2f5w7lccL9ECeJDZJvr4="
+      "password": "pbkdf2_sha256$1000000$fakehashforlawrence$l2qhLNzEfmKqfTwHxPfAR/i2f5w7lccL9ECeJDZJvr4=",
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true
     }
   }
 ]
