@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
-import rollbar
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
@@ -39,7 +38,7 @@ ALLOWED_HOSTS = [
 
 
 INSTALLED_APPS = [
-    'task_manager'
+    'task_manager',
     "task_manager.users",
     "task_manager.statuses",
     "task_manager.tasks",
