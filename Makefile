@@ -31,6 +31,7 @@ lint-fix:
 	uv run ruff check --fix
 
 test:
+	python manage.py loaddata users.json && make test
 	uv run pytest --ds=$(SETTINGS) --reuse-db -xvs
 
 coverage:
