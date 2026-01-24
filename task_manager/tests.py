@@ -42,7 +42,7 @@ class UserTests(TestCase):
             reverse("login"),
             {"username": "testuser", "password": "testpass123"},
         )
-        self.assertRedirects(response, reverse("users:index"))
+        self.assertRedirects(response, "/")
 
     def test_user_update_redirect(self):
         """После редактирования переходим на список пользователей"""
