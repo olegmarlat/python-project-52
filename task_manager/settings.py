@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import rollbar
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
@@ -21,7 +22,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
-# DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -31,10 +31,15 @@ DEBUG = True
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 if not SECRET_KEY:
     SECRET_KEY = "django-insecure-ci-dev-key-change-in-production"
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "webserver"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "webserver",
+    ]
 
 
 INSTALLED_APPS = [
+    'task_manager'
     "task_manager.users",
     "task_manager.statuses",
     "task_manager.tasks",
@@ -49,7 +54,7 @@ INSTALLED_APPS = [
     "django_filters",
 ]
 
-AUTH_USER_MODEL = "users.user"
+AUTH_USER_MODEL = "users.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
