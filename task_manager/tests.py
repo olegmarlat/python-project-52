@@ -17,13 +17,11 @@ class UserTests(TestCase):
 
     def test_user_creation(self):
         """Тест создания пользователя (C в CRUD)"""
-        # Проверяем, что страница регистрации доступна
-        response = self.client.get(reverse("users:create"))
+        response = self.client.get(reverse("register"))
         self.assertEqual(response.status_code, 200)
 
-        # Создаем пользователя
         response = self.client.post(
-            reverse("users:create"),
+            reverse("register"),
             {
                 "username": "newuser",
                 "first_name": "New",
@@ -33,28 +31,21 @@ class UserTests(TestCase):
                 "email": "new@example.com",
             },
         )
-        # Добавь проверку редиректа
         self.assertRedirects(response, reverse("login"))
 
-        # Проверяем редирект на страницу входа
-        self.assertRedirects(response, reverse("login"))
-
-        # Проверяем, что пользователь создался
+        # проверка создания пользователя
         self.assertTrue(User.objects.filter(username="newuser").exists())
 
     def test_user_login_redirect(self):
-        """Тест, что после входа переходим на главную"""
+        """проверка, что после входа переходим на главную"""
         response = self.client.post(
             reverse("login"),
             {"username": "testuser", "password": "testpass123"},
         )
-
-        # Проверяем редирект на список пользователей
         self.assertRedirects(response, reverse("users:index"))
 
     def test_user_update_redirect(self):
-        """Тест, что после редактирования переходим на список пользователей"""
-        # Входим как администратор (или как сам пользователь)
+        """После редактирования переходим на список пользователей"""
         self.client.login(username="admin", password="adminpass123")
 
         response = self.client.post(
@@ -62,13 +53,11 @@ class UserTests(TestCase):
             {
                 "username": "updateduser",
                 "email": "updated@example.com",
-                # Добавь другие обязательные поля, если есть
                 "first_name": "Test",
                 "last_name": "User",
             },
         )
 
-        # Проверяем редирект на список пользователей
         self.assertRedirects(response, reverse("users:index"))
 
     def test_user_list_no_auth(self):

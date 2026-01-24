@@ -14,7 +14,7 @@ class UserTest(TestCase):
 
     def test_create_user(self):
         response = self.client.post(
-            reverse("users:create"),
+            reverse("register"),
             {
                 "first_name": "Darya",
                 "last_name": "Star",
