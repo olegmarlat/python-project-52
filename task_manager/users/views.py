@@ -225,6 +225,6 @@ class CustomLogoutView(BaseLogoutView):
         from django.contrib.auth import logout
         logout(request)
         # сообщение об успешном выходе
-        messages.success(request, _("Вы успешно вышли из системы!"))
+        messages.success(request, _("Вы разлогинены"))
         # переход на главную
         return redirect('/')
