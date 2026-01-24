@@ -28,5 +28,15 @@
       "username": "arya_stark",
       "password": "pbkdf2_sha256$1000000$B9nTa6LDut6ZUjdoWjHyXM$qTqzyCBwtDuvKQPGoEEaFe6VbxYsr42qe2gbWcvZpr4="
     }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "first_name": "Lawrence",
+      "last_name": "Kulas",
+      "username": "lawrence_k",
+      "password": "pbkdf2_sha256$1000000$fakehashforlawrence$l2qhLNzEfmKqfTwHxPfAR/i2f5w7lccL9ECeJDZJvr4="
+    }
   }
 ]
