@@ -1,3 +1,4 @@
+<!-- templates/users/user_delete.html -->
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
@@ -22,7 +23,7 @@
                 <form method="post">
                     {% csrf_token %}
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-danger">Да, удалить</button>
+                        <button type="submit" class="btn btn-danger">{{ button_name }}</button>
                         <a href="{% url 'user_list' %}" class="btn btn-secondary">Отмена</a>
                     </div>
                 </form>
