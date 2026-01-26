@@ -6,6 +6,6 @@ app_name = 'statuses'
 urlpatterns = [
     path("", views.statuses_list, name="statuses_list"),
     path("create/", views.status_create, name="status_create"),
-    path("update/<int:pk>/", views.status_update, name="status_update"),
-    path("delete/<int:pk>/", views.status_delete, name="status_delete"),
+    path("<int:pk>/update/", views.status_update, name="status_update"),
+    path("<int:pk>/delete/", views.status_delete, name="status_delete"),
 ]
