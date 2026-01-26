@@ -52,7 +52,8 @@ class UserCreateView(BaseUserView, CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")
     success_message = _("Пользователь успешно зарегистрирован")
-    extra_context = {"title": _("Sign Up"), "button_name": _("Register")}
+    extra_context = {"title": _("Регистрация"),
+                     "button_name": _("Зарегистрировать")}
 
 
 class UserUpdateView(
@@ -65,7 +66,7 @@ class UserUpdateView(
                                   "to change another user.")
     extra_context = {
         "title": _("Edit profile"),
-        "button_name": _("Save changes"),
+        "button_name": _("Изменить"),
     }
 
 

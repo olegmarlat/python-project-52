@@ -5,11 +5,11 @@
 {% block content %}
   <div class="row justify-content-center mt-5">
     <div class="col-md-6">
-      <h2 class="text-center mb-4">Регистрация</h2>
+      <h2 class="text-center mb-4">{{ title|default:"Регистрация" }}</h2>
       <form method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary w-100">Зарегистрировать</button>
+        <button type="submit" class="btn btn-primary w-100">{{ button_name|default:"Зарегистрировать" }}</button>
       </form>
       <div class="text-center mt-3">
         <a href="{% url 'login' %}">Уже есть аккаунт? Войти</a>

@@ -40,12 +40,12 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):
 
         if password1 and password2:
             if password1 != password2:
-                self.add_error("password2", _("Passwords don't match."))
+                self.add_error("password2", _("Пароли не совпадают."))
             elif len(password1) < 3:
                 self.add_error(
                     "password2",
                     _(
-                        "This password is too short. It must contain at least 3 characters."
+                        "Этот пароль слишком короткий. Он должен содержать не менее 3 символов."
                     ),
                 )
         return cleaned_data
@@ -56,13 +56,13 @@ class CustomUserChangeForm(FormStyleMixin, forms.ModelForm):
         label=_("Пароль"),
         widget=forms.PasswordInput,
         required=False,
-        help_text=_("Leave blank to keep current password."),
+        help_text=_("Оставьте поле пустым, чтобы сохранить текущий пароль."),
     )
     password2 = forms.CharField(
         label=_("Подтверждение пароля"),
         widget=forms.PasswordInput,
         required=False,
-        help_text=_("Enter new password again to confirm."),
+        help_text=_("Для подтверждения введите новый пароль еще раз."),
     )
 
     class Meta(BaseUserForm.Meta):
@@ -75,14 +75,14 @@ class CustomUserChangeForm(FormStyleMixin, forms.ModelForm):
 
         if password1 or password2:
             if not password1 or not password2:
-                self.add_error("password2", _("Please fill both password fields."))
+                self.add_error("password2", _("Пожалуйста, заполните оба поля для пароля."))
             elif password1 != password2:
-                self.add_error("password2", _("Passwords don't match."))
+                self.add_error("password2", _("Пароли не совпадают."))
             elif len(password1) < 3:
                 self.add_error(
                     "password2",
                     _(
-                        "This password is too short. It must contain at least 3 characters."
+                        "Этот пароль слишком короткий. Он должен содержать не менее 3 символов."
                     ),
                 )
         return cleaned_data
