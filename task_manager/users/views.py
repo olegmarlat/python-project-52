@@ -88,7 +88,7 @@ class UserDeleteView(
                                  "because they are being used")
     extra_context = {
         "title": _("User deletion"),
-        "button_name": _("Yes, delete"),
+        "button_name": _("Да, удалить"),
     }
 
 
