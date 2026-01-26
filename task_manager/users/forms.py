@@ -53,13 +53,13 @@ class CustomUserCreationForm(FormStyleMixin, UserCreationForm):
 
 class CustomUserChangeForm(FormStyleMixin, forms.ModelForm):
     password1 = forms.CharField(
-        label=_("New Password"),
+        label=_("Password"),
         widget=forms.PasswordInput,
         required=False,
         help_text=_("Leave blank to keep current password."),
     )
     password2 = forms.CharField(
-        label=_("Confirm Password"),
+        label=_("Confirm password"),
         widget=forms.PasswordInput,
         required=False,
         help_text=_("Enter new password again to confirm."),
