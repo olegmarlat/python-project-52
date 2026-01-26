@@ -1,11 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-<h1>{% if form.instance.pk %}Редактировать статус{% else %}Новый статус{% endif %}</h1>
-<form method="post">
+  <h1 class="my-4">{% if form.instance.pk %}Редактировать статус{% else %}Новый статус{% endif %}</h1>
+  
+  <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Сохранить</button>
-    <a href="{% url 'status_list' %}">Отмена</a>
-</form>
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary">Создать</button>
+    <a href="{% url 'statuses:statuses_list' %}" class="btn btn-secondary">Отмена</a>
+  </form>
 {% endblock %}
