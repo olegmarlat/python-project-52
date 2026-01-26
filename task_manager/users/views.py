@@ -61,7 +61,7 @@ class UserUpdateView(
 ):
     form_class = CustomUserChangeForm
     success_url = reverse_lazy(USERS_INDEX_URL)
-    success_message = _("Пользователь успешно изменён")
+    success_message = _("Пользователь успешно изменен")
     permission_denied_message = _("You don't have rights"
                                   "to change another user.")
     extra_context = {
