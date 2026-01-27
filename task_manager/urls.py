@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-# from django.contrib.auth import views as auth_views
 from . import views
 from task_manager.users.views import CustomLoginView, UserCreateView
 from task_manager.users.views import CustomLogoutView
