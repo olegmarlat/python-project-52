@@ -1,49 +1,38 @@
+<!-- templates/labels/index.html -->
 {% extends "base.html" %}
 {% load django_bootstrap5 %}
-{% load i18n %}
 
 {% block content %}
-<div class="container">
-  <h1 class="my-4">{% translate "Labels" %}</h1>
-
-  <a href="{% url 'labels:create' %}" class="btn btn-primary mb-3">
-    Создать метку
-  </a>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>{% translate "ID" %}</th>
-        <th>{% translate "Name" %}</th>
-        <th>{% translate "Created at" %}</th>
-        <th>{% translate "Actions" %}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for label in labels %}
+  <h1 class="my-4">Метки</h1>
+  
+  <a href="{% url 'labels:create' %}" class="btn btn-primary mb-3">Создать метку</a>
+  
+  {% if labels %}
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <td>{{ label.id }}</td>
-          <td>{{ label.name }}</td>
-          <td>{{ label.created_at|date:"d.m.Y H:i" }}</td>
-          <td>
-            <div class="d-flex gap-2">
-              <a href="{% url 'labels:update' label.id %}" class="btn btn-outline-info btn-sm">
-                {% translate "Edit" %}
-              </a>
-              <a href="{% url 'labels:delete' label.id %}" class="btn btn-outline-danger btn-sm">
-                {% translate "Delete" %}
-              </a>
-            </div>
-          </td>
+          <th>ID</th>
+          <th>Имя</th>
+          <th>Дата создания</th>
+          <th>Действия</th>
         </tr>
-      {% empty %}
-        <tr>
-          <td colspan="4" class="text-center text-muted py-3">
-            {% translate "No labels found" %}
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        {% for label in labels %}
+          <tr>
+            <td>{{ label.pk }}</td>
+            <td>{{ label.name }}</td>
+            <td>{{ label.created_at|date:"d.m.Y H:i" }}</td>
+            <td>
+              <a href="{% url 'labels:update' label.pk %}">Изменить</a>
+              <br>
+              <a href="{% url 'labels:delete' label.pk %}">Удалить</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>Меток пока нет.</p>
+  {% endif %}
 {% endblock %}

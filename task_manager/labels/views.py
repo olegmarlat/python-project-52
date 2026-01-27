@@ -25,22 +25,32 @@ class LabelListView(CustomLoginRequiredMixin, ListView):
     ordering = ["id"]
 
 
-class LabelCreateView(CustomLoginRequiredMixin, SuccessMessageMixin, CreateView):
+class LabelCreateView(
+    CustomLoginRequiredMixin,
+    SuccessMessageMixin,
+    CreateView
+):
     model = Label
     template_name = "labels/label_form.html"
     form_class = LabelCreationForm
     success_url = reverse_lazy(LABELS_INDEX_URL)
-    success_message = _("Label was created successfully")
-    extra_context = {"title": _("Create label"), "button_name": _("Create")}
+    success_message = _("Метка успешно создана")  # Исправлено!
+    extra_context = {"title": _("Создать метку"),
+                     "button_name": _("Создать")}
 
 
-class LabelUpdateView(CustomLoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class LabelUpdateView(
+    CustomLoginRequiredMixin,
+    SuccessMessageMixin,
+    UpdateView
+):
     form_class = LabelCreationForm
     model = Label
     template_name = "labels/label_form.html"
     success_url = reverse_lazy(LABELS_INDEX_URL)
-    success_message = _("Label was updated successfully")
-    extra_context = {"title": _("Update label"), "button_name": _("Update")}
+    success_message = _("Метка успешно изменена")
+    extra_context = {"title": _("Редактировать метку"),
+                     "button_name": _("Изменить")}
 
 
 class LabelDeleteView(
@@ -51,10 +61,10 @@ class LabelDeleteView(
     template_name = "labels/label_delete.html"
     model = Label
     success_url = reverse_lazy(LABELS_INDEX_URL)
-    success_message = _("Label was deleted successfully")
+    success_message = _("Метка успешно удалена")
     extra_context = {
-        "title": _("Label deletion"),
-        "button_name": _("Yes, delete"),
+        "title": _("Удаление метки"),
+        "button_name": _("Да, удалить"),
     }
 
     def post(self, request, *args, **kwargs):
@@ -68,7 +78,7 @@ class LabelDeleteView(
         if Task.objects.filter(labels=self.object).exists():
             messages.error(
                 request,
-                _("Cannot delete this label because it is being used")
+                _("Невозможно удалить метку, потому что она используется")
             )
             return redirect(self.success_url)
 
