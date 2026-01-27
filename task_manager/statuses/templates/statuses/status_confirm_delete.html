@@ -1,4 +1,3 @@
-<!-- templates/statuses/status_confirm_delete.html -->
 {% extends "base.html" %}
 {% load django_bootstrap5 %}
 
@@ -7,7 +6,7 @@
   
   <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <button type="submit" class="btn btn-danger">Удалить</button>
     <a href="{% url 'statuses:statuses_list' %}" class="btn btn-secondary">Отмена</a>
   </form>
 {% endblock %}
