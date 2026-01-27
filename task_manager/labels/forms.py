@@ -8,7 +8,7 @@ class LabelCreationForm(forms.ModelForm):
         model = Label
         fields = ["name"]
         labels = {
-            "name": _("Name"),
+            "name": _("Имя"),
         }
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
