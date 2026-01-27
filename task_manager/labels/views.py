@@ -68,9 +68,6 @@ class LabelDeleteView(
     }
 
     def post(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
 
         from task_manager.tasks.models import Task
@@ -82,4 +79,5 @@ class LabelDeleteView(
             )
             return redirect(self.success_url)
 
-        return super().delete(request, *args, **kwargs)
+        # Если метку можно удалить — вызываем родительский post
+        return super().post(request, *args, **kwargs)
