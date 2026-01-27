@@ -1,5 +1,4 @@
-<!-- task_manager/tasks/templates/tasks/task_list.html -->
-{% extends "base.html" %}
+<{% extends "base.html" %}
 {% load django_bootstrap5 %}
 
 {% block content %}
@@ -37,10 +36,11 @@
             <tr>
                 <th class="col-1">ID</th>
                 <th class="col-2">Название</th>
-                <th class="col-2">Статус</th>
-                <th class="col-2">Автор</th>
-                <th class="col-2">Исполнитель</th>
-                <th class="col-2">Дата создания</th>
+                <th class="col-2">Описание</th>
+                <th class="col-1">Статус</th>
+                <th class="col-1">Автор</th>
+                <th class="col-1">Исполнитель</th>
+                <th class="col-1">Дата создания</th>
                 <th class="col-1"></th>
             </tr>
         </thead>
@@ -49,16 +49,17 @@
             <tr>
                 <td class="col-1">{{ task.id }}</td>
                 <td class="col-2">{{ task.name }}</td>
-                <td class="col-2">{{ task.status }}</td>
-                <td class="col-2">{{ task.author }}</td>
-                <td class="col-2">
+                <td class="col-2">{{ task.description|default:"-" }}</td>
+                <td class="col-1">{{ task.status }}</td>
+                <td class="col-1">{{ task.author }}</td>
+                <td class="col-1">
                     {% if task.executor %}
                         {{ task.executor }}
                     {% else %}
                         Не назначен
                     {% endif %}
                 </td>
-                <td class="col-2">{{ task.created_at|date:"d.m.Y H:i" }}</td>
+                <td class="col-1">{{ task.created_at|date:"d.m.Y H:i" }}</td>
                 <td class="col-1">
                     <a href="{% url 'task_update' task.id %}">Изменить</a>
                     <br>
@@ -67,7 +68,7 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="7">Нет задач</td>
+                <td colspan="8">Нет задач</td>
             </tr>
             {% endfor %}
         </tbody>
