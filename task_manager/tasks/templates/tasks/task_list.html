@@ -1,58 +1,76 @@
-
+<!-- task_manager/tasks/templates/tasks/task_list.html -->
 {% extends "base.html" %}
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h1 class="my-4">Задачи</h1>
+<div class="container">
+    <h1 class="my-4">Задачи</h1>
+    
+    <a href="{% url 'task_create' %}" class="btn btn-primary mb-3">
+        Создать задачу
+    </a>
 
-<a href="{% url 'tasks:task_create' %}" class="btn btn-primary mb-3">Создать задачу</a> 
+    <form method="get" class="mb-4">
+        {% bootstrap_field filterset.form.status show_label=True %}
+        {% bootstrap_field filterset.form.executor show_label=True %}
+        {% bootstrap_field filterset.form.labels show_label=True %}
 
-<form method="get" class="row g-3 mb-4">
-  <div class="col-md-3">
-    {% bootstrap_field filterset.form.status show_label=False %}
-  </div>
-  <div class="col-md-3">
-    {% bootstrap_field filterset.form.executor show_label=False %}
-  </div>
-  <div class="col-md-3">
-    {% bootstrap_field filterset.form.labels show_label=False %}
-  </div>
-  <div class="col-md-3">
-    <div class="form-check mt-4">
-      {% bootstrap_field filterset.form.self_tasks show_label=False %}
-      <label class="form-check-label" for="{{ filterset.form.self_tasks.id_for_label }}">
-        Только мои задачи
-      </label>
-    </div>
-  </div>
-  <div class="col-12">
-    {% bootstrap_button "Применить" button_type="submit" button_class="btn-primary" %}
-    <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary">Сбросить</a> 
-  </div>
-</form>
+        <div class="form-group mb-3">
+            <div class="form-check">
+                <input type="checkbox"
+                        name="self_tasks"
+                        id="id_self_tasks"
+                        class="form-check-input"
+                        {% if request.GET.self_tasks %}checked{% endif %}>
+                <label class="form-check-label" for="id_self_tasks">
+                        Только мои задачи
+                </label>
+            </div>
+        </div>
 
-{% for task in tasks %}
-  <div class="card mb-2">
-    <div class="card-body">
-      <h5 class="card-title">{{ task.name }}</h5>
-      <p class="card-text">
-        <strong>Статус:</strong> {{ task.status }}<br>
-        <strong>Автор:</strong> {{ task.author }}<br>
-        <strong>Исполнитель:</strong> {{ task.executor|default:"Не назначен" }}
-      </p>
-      {% if task.labels.all %}
-        <p class="card-text">
-          <strong>Метки:</strong>
-          {% for label in task.labels.all %}
-            <span class="badge bg-secondary">{{ label }}</span>
-          {% endfor %}
-        </p>
-      {% endif %}
-    </div>
-  </div>
-{% empty %}
-  <div class="alert alert-info" role="alert">
-    Нет задач.
-  </div>
-{% endfor %}
+        <button type="submit" class="btn btn-primary">Применить</button>
+        <a href="{% url 'tasks_list' %}" class="btn btn-secondary">Сбросить</a>
+    </form>
+
+    <table class="table table-striped" style="table-layout: fixed;">
+        <thead>
+            <tr>
+                <th class="col-1">ID</th>
+                <th class="col-2">Название</th>
+                <th class="col-2">Статус</th>
+                <th class="col-2">Автор</th>
+                <th class="col-2">Исполнитель</th>
+                <th class="col-2">Дата создания</th>
+                <th class="col-1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td class="col-1">{{ task.id }}</td>
+                <td class="col-2">{{ task.name }}</td>
+                <td class="col-2">{{ task.status }}</td>
+                <td class="col-2">{{ task.author }}</td>
+                <td class="col-2">
+                    {% if task.executor %}
+                        {{ task.executor }}
+                    {% else %}
+                        Не назначен
+                    {% endif %}
+                </td>
+                <td class="col-2">{{ task.created_at|date:"d.m.Y H:i" }}</td>
+                <td class="col-1">
+                    <a href="{% url 'task_update' task.id %}">Изменить</a>
+                    <br>
+                    <a href="{% url 'task_delete' task.id %}">Удалить</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">Нет задач</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
