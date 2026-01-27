@@ -17,7 +17,7 @@ def task_create(request):
             task.author = request.user
             task.save()
             messages.success(request, "Задача успешно создана!")
-            return redirect("tasks_list")
+            return redirect("task_list")
     else:
         form = TaskForm()
     return render(request, "tasks/task_form.html", {"form": form})
@@ -28,13 +28,13 @@ def task_update(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if task.author != request.user:
         messages.error(request, "Вы не можете редактировать чужую задачу.")
-        return redirect("tasks_list")
+        return redirect("task_list")
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
             messages.success(request, "Задача успешно изменена!")
-            return redirect("tasks_list")
+            return redirect("task_list")
     else:
         form = TaskForm(instance=task)
     return render(request, "tasks/task_form.html", {"form": form})
@@ -45,11 +45,11 @@ def task_delete(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if task.author != request.user:
         messages.error(request, "Вы не можете удалить чужую задачу!")
-        return redirect("tasks_list")
+        return redirect("task_list")
     if request.method == "POST":
         task.delete()
         messages.success(request, "Задача успешно удалена!")
-        return redirect("tasks_list")
+        return redirect("task_list")
     return render(request, "tasks/task_confirm_delete.html", {"task": task})
 
 
@@ -72,5 +72,5 @@ class TaskListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["filterset"] = (
             self.filterset
-        )  # чтобы отобразить форму в шаблоне
+        )
         return context
