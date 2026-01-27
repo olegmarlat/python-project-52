@@ -13,6 +13,17 @@ class Task(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE
     )
     labels = models.ManyToManyField(Label, blank=True)
+    
+    executor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="assigned_tasks",
+        verbose_name="Исполнитель"
+    )
+    labels = models.ManyToManyField(Label, blank=True, verbose_name="Метки")
+
 
     def __str__(self):
         return self.name
