@@ -24,7 +24,7 @@ class TaskCRUDTest(TestCase):
         self.assertEqual(Task.objects.count(), 1)
         task = Task.objects.first()
         self.assertEqual(task.author, self.user1)
-        self.assertRedirects(response, reverse("tasks_list"))
+        self.assertRedirects(response, reverse("task_list"))
 
     def test_delete_own_task(self):
         task = Task.objects.create(
@@ -32,7 +32,7 @@ class TaskCRUDTest(TestCase):
         )
         response = self.client.post(reverse("task_delete", args=[task.pk]))
         self.assertEqual(Task.objects.count(), 0)
-        self.assertRedirects(response, reverse("tasks_list"))
+        self.assertRedirects(response, reverse("task_list"))
 
     def test_cannot_delete_other_user_task(self):
         task = Task.objects.create(
@@ -40,7 +40,7 @@ class TaskCRUDTest(TestCase):
         )
         response = self.client.post(reverse("task_delete", args=[task.pk]))
         self.assertEqual(Task.objects.count(), 1)
-        self.assertRedirects(response, reverse("tasks_list"))
+        self.assertRedirects(response, reverse("task_list"))
 
 
 class TaskFilterTest(TestCase):
@@ -69,30 +69,26 @@ class TaskFilterTest(TestCase):
 
     def test_filter_by_status(self):
         response = self.client.get(
-            reverse("tasks_list"), {"status": self.status_new.id}
+            reverse("task_list"), {"status": self.status_new.id}
         )
         self.assertContains(response, "Задача 1")
         self.assertNotContains(response, "Задача 2")
 
-    # Удали этот тест, так как нет поля executor
-    # def test_filter_by_executor(self):
-    #     ...
-
     def test_filter_by_label(self):
         response = self.client.get(
-            reverse("tasks_list"), {"labels": self.label_bug.id}
+            reverse("task_list"), {"labels": self.label_bug.id}
         )
         self.assertContains(response, "Задача 1")
         self.assertNotContains(response, "Задача 2")
 
     def test_filter_self_tasks(self):
-        response = self.client.get(reverse("tasks_list"), {"self_tasks": "on"})
+        response = self.client.get(reverse("task_list"), {"self_tasks": "on"})
         self.assertContains(response, "Задача 1")
         self.assertNotContains(response, "Задача 2")
 
     def test_combined_filters(self):
         response = self.client.get(
-            reverse("tasks_list"),
+            reverse("task_list"),
             {"status": self.status_new.id, "self_tasks": "on"},
         )
         self.assertContains(response, "Задача 1")
