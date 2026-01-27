@@ -62,10 +62,9 @@ class UserUpdateView(
     form_class = CustomUserChangeForm
     success_url = reverse_lazy(USERS_INDEX_URL)
     success_message = _("Пользователь успешно изменен")
-    permission_denied_message = _("You don't have rights"
-                                  "to change another user.")
+    permission_denied_message = _("У вас нет прав для изменения другого пользователя.")  # ← Переведено!
     extra_context = {
-        "title": _("Edit profile"),
+        "title": _("Редактировать профиль"),  # ← Переведено!
         "button_name": _("Изменить"),
     }
 
@@ -80,15 +79,13 @@ class UserDeleteView(
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
-    permission_denied_message = _("You don't have rights "
-                                  "to change another user.")
-    access_denied_message = _("You don't have rights to change another user.")
+    permission_denied_message = _("У вас нет прав для изменения другого пользователя.")  # ← Переведено!
+    access_denied_message = _("У вас нет прав для изменения другого пользователя.")  # ← Переведено!
     protected_object_url = reverse_lazy(USERS_INDEX_URL)
-    protected_object_message = _("Cannot delete this user"
-                                 "because they are being used")
+    protected_object_message = _("Невозможно удалить пользователя, потому что он используется")  # ← Переведено!
     extra_context = {
-        "title": _("User deletion"),
-        "button_name": "Да, удалить",
+        "title": _("Удаление пользователя"),  # ← Переведено!
+        "button_name": _("Да, удалить"),
     }
 
 
@@ -216,7 +213,7 @@ class CustomLoginView(LoginView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, "Вы залогинены")
+        messages.success(self.request, _("Вы залогинены"))  # ← Добавлен _
         return response
 
 
