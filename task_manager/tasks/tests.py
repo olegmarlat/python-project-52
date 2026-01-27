@@ -17,30 +17,30 @@ class TaskCRUDTest(TestCase):
 
     def test_create_task(self):
         response = self.client.post(
-            reverse("tasks:task_create"),
+            reverse("task_create"),
             {"name": "Новая задача", "status": self.status.id},
         )
         self.assertEqual(Task.objects.count(), 1)
         task = Task.objects.first()
         self.assertEqual(task.author, self.user1)
-        self.assertRedirects(response, reverse("tasks:task_list"))
+        self.assertRedirects(response, reverse("task_list"))
 
     def test_delete_own_task(self):
         task = Task.objects.create(
             name="Моя задача", author=self.user1, status=self.status
         )
-        response = self.client.post(reverse("tasks:task_delete", args=[task.pk]))
+        response = self.client.post(reverse("task_delete", args=[task.pk]))
         self.assertEqual(Task.objects.count(), 0)
 
-        self.assertRedirects(response, reverse("tasks:task_list"))
+        self.assertRedirects(response, reverse("task_list"))
 
     def test_cannot_delete_other_user_task(self):
         task = Task.objects.create(
             name="Чужая задача", author=self.user2, status=self.status
         )
-        response = self.client.post(reverse("tasks:task_delete", args=[task.pk]))
+        response = self.client.post(reverse("task_delete", args=[task.pk]))
         self.assertEqual(Task.objects.count(), 1)
-        self.assertRedirects(response, reverse("tasks:task_list"))
+        self.assertRedirects(response, reverse("task_list"))
 
 
 class TaskFilterTest(TestCase):
@@ -68,7 +68,7 @@ class TaskFilterTest(TestCase):
 
     def test_filter_by_status(self):
         response = self.client.get(
-            reverse("tasks:task_list"),
+            reverse("task_list"),
             {"status": self.status_new.id}
         )
         self.assertContains(response, "Задача 1")
@@ -77,20 +77,20 @@ class TaskFilterTest(TestCase):
     def test_filter_by_label(self):
 
         response = self.client.get(
-            reverse("tasks:task_list"),
+            reverse("task_list"),
             {"labels": self.label_bug.id}
         )
         self.assertContains(response, "Задача 1")
         self.assertNotContains(response, "Задача 2")
 
     def test_filter_self_tasks(self):
-        response = self.client.get(reverse("tasks:task_list"), {"self_tasks": "on"})
+        response = self.client.get(reverse("task_list"), {"self_tasks": "on"})
         self.assertContains(response, "Задача 1")
         self.assertNotContains(response, "Задача 2")
 
     def test_combined_filters(self):
         response = self.client.get(
-            reverse("tasks:task_list"),
+            reverse("task_list"),
             {"status": self.status_new.id, "self_tasks": "on"},
         )
         self.assertContains(response, "Задача 1")
