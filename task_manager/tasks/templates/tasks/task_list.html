@@ -1,9 +1,10 @@
-<!-- templates/tasks/tasks_list.html -->
 {% extends "base.html" %}
 {% load django_bootstrap5 %}
 
 {% block content %}
-<h1>Задачи</h1>
+<h1 class="my-4">Задачи</h1>
+
+<a href="{% url 'tasks:create' %}" class="btn btn-primary mb-3">Создать задачу</a>
 
 <form method="get" class="row g-3 mb-4">
   <div class="col-md-3">
