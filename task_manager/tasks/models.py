@@ -8,9 +8,7 @@ class Task(models.Model):
     description = models.TextField(blank=True, verbose_name="Описание")
     status = models.ForeignKey(
         "statuses.Status",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        on_delete=models.PROTECT,  # ← КЛЮЧЕВОЕ: защищает от удаления
         verbose_name="Статус"
     )
     author = models.ForeignKey(
