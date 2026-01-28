@@ -1,15 +1,11 @@
 from django import forms
-from django.utils.translation import gettext_lazy as _
 from .models import Label
 
 
-class LabelCreationForm(forms.ModelForm):
+class LabelForm(forms.ModelForm):
     class Meta:
         model = Label
-        fields = ["name"]
+        fields = ['name']
         labels = {
-            "name": _("Имя"),
-        }
-        widgets = {
-            "name": forms.TextInput(attrs={"class": "form-control"}),
+            'name': 'Имя',
         }
