@@ -1,4 +1,3 @@
-# task_manager/tasks/models.py
 from django.db import models
 from django.conf import settings
 from task_manager.labels.models import Label
@@ -8,7 +7,11 @@ class Task(models.Model):
     name = models.CharField(max_length=100, verbose_name="Имя")
     description = models.TextField(blank=True, verbose_name="Описание")
     status = models.ForeignKey(
-        "statuses.Status", on_delete=models.PROTECT, verbose_name="Статус"
+        "statuses.Status",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Статус"
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
