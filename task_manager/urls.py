@@ -6,7 +6,6 @@ from task_manager.users.views import (
     UserLoginView,
     UserLogoutView,
 )
-from django.conf import settings
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
@@ -19,8 +18,3 @@ urlpatterns = [
     path("labels/", include("task_manager.labels.urls", namespace="labels")),
     path("tasks/", include("task_manager.tasks.urls")),
 ]
-
-if settings.DEBUG:
-    urlpatterns = [
-        path('__debug__/', include('debug_toolbar.urls')),
-    ] + urlpatterns
