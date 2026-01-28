@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Добро пожаловать в Менеджер задач!</h1>
-  <p>Используйте навигацию сверху, чтобы перейти к нужному разделу.</p>
+<div class="container">
+    <h1 class="my-4">Task Manager</h1>
+    
+    {% if user.is_authenticated %}
+        <p>Вы вошли как {{ user.username }}</p>
+        <a href="{% url 'logout' %}" class="btn btn-primary">Выйти</a>
+    {% else %}
+        <p>Пожалуйста, войдите в систему для продолжения</p>
+        <a href="{% url 'login' %}" class="btn btn-primary">Вход</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Регистрация</a>
+    {% endif %}
+</div>
 {% endblock %}
