@@ -8,8 +8,6 @@ from task_manager.users.views import (
 )
 from django.conf import settings
 
-USERS_INDEX_URL = "users:index"
-
 urlpatterns = [
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path("admin/", admin.site.urls),
@@ -17,14 +15,8 @@ urlpatterns = [
     path("logout/", UserLogoutView.as_view(), name="logout"),
     path("users/create/", UserCreateView.as_view(), name="create"),
     path("users/", include("task_manager.users.urls")),
-    path(
-        "statuses/",
-        include("task_manager.statuses.urls", namespace='statuses')
-    ),
-    path(
-        "labels/",
-        include("task_manager.labels.urls", namespace='labels')
-    ),
+    path("statuses/", include("task_manager.statuses.urls", namespace="statuses")),
+    path("labels/", include("task_manager.labels.urls", namespace="labels")),
     path("tasks/", include("task_manager.tasks.urls")),
 ]
 
