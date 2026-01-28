@@ -1,108 +1,123 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.utils.translation import gettext_lazy as _
-from task_manager.users.models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import get_user_model
+from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError
+
+User = get_user_model()
 
 
-class FormStyleMixin:
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs.update({"class": "form-control"})
-
-
-class BaseUserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ("first_name", "last_name", "username")
-        help_texts = {
-            "username": _(
-                "Required. 150 characters or fewer. "
-                "Letters, digits and @/./+/-/_ only."
-            ),
-        }
-
-
-class CustomUserCreationForm(FormStyleMixin, UserCreationForm):
-    class Meta(BaseUserForm.Meta):
-        fields = (*BaseUserForm.Meta.fields, "password1", "password2")
-        help_texts = {
-            **BaseUserForm.Meta.help_texts,
-            "password1": _("Your password must contain at least 3 characters."),
-            "password2": _("Please enter your password again to confirm."),
-        }
-
-    def clean(self):
-        cleaned_data = super().clean()
-        password1 = cleaned_data.get("password1")
-        password2 = cleaned_data.get("password2")
-
-        if password1 and password2:
-            if password1 != password2:
-                self.add_error("password2", _("Пароли не совпадают."))
-            elif len(password1) < 3:
-                self.add_error(
-                    "password2",
-                    _(
-                        "Этот пароль слишком короткий. Он должен содержать не менее 3 символов."
-                    ),
-                )
-        return cleaned_data
-
-
-class CustomUserChangeForm(FormStyleMixin, forms.ModelForm):
+class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(
         label=_("Пароль"),
         widget=forms.PasswordInput,
-        required=False,
-        help_text=_("Оставьте поле пустым, чтобы сохранить текущий пароль."),
+        strip=False,
     )
     password2 = forms.CharField(
         label=_("Подтверждение пароля"),
         widget=forms.PasswordInput,
-        required=False,
-        help_text=_("Для подтверждения введите новый пароль еще раз."),
+        strip=False,
     )
 
-    class Meta(BaseUserForm.Meta):
-        fields = (*BaseUserForm.Meta.fields, "password1", "password2")
+    class Meta:
+        model = User
+        fields = (
+            "first_name",
+            "last_name",
+            "username",
+        )
+        labels = {
+            "first_name": _("Имя"),
+            "last_name": _("Фамилия"),
+            "username": _("Имя пользователя"),
+        }
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password1 = cleaned_data.get("password1")
-        password2 = cleaned_data.get("password2")
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise ValidationError(
+                _("Пароли не совпадают."),
+                code="password_mismatch",
+            )
+        return password2
 
-        if password1 or password2:
-            if not password1 or not password2:
-                self.add_error("password2", _("Пожалуйста, заполните оба поля для пароля."))
-            elif password1 != password2:
-                self.add_error("password2", _("Пароли не совпадают."))
-            elif len(password1) < 3:
-                self.add_error(
-                    "password2",
-                    _(
-                        "Этот пароль слишком короткий. Он должен содержать не менее 3 символов."
-                    ),
-                )
-        return cleaned_data
+    def clean_password1(self):
+        password1 = self.cleaned_data.get("password1")
+        if password1 and len(password1) < 3:
+            raise ValidationError(
+                _(
+                    "Этот пароль слишком короткий. "
+                    "Он должен содержать не менее 3 символов."
+                ),
+                code="password_too_short",
+            )
+        return password1
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        if password1 := self.cleaned_data.get("password1"):
-            user.set_password(password1)
+        user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
         return user
 
 
-class CustomAuthenticationForm(FormStyleMixin, AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Добавляем placeholder'ы
-        self.fields["username"].widget.attrs.update(
-            {"placeholder": _("Имя пользователя")}
+class UserUpdateForm(forms.ModelForm):
+    password1 = forms.CharField(
+        label=_("Новый пароль"),
+        widget=forms.PasswordInput,
+        strip=False,
+        required=False,
+    )
+    password2 = forms.CharField(
+        label=_("Подтверждение нового пароля"),
+        widget=forms.PasswordInput,
+        strip=False,
+        required=False,
+    )
+
+    class Meta:
+        model = User
+        fields = (
+            "first_name",
+            "last_name",
+            "username",
         )
-        self.fields["password"].widget.attrs.update(
-            {"placeholder": _("Пароль")}
-        )
+        labels = {
+            "first_name": _("Имя"),
+            "last_name": _("Фамилия"),
+            "username": _("Имя пользователя"),
+        }
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 or password2:
+            if not password1 or not password2:
+                self.add_error(
+                    "password2",
+                    _("Пожалуйста, заполните оба поля для пароля.")
+                )
+            elif password1 != password2:
+                self.add_error("password2", _("Пароли не совпадают."))
+        return password2
+
+    def clean_password1(self):
+        password1 = self.cleaned_data.get("password1")
+        if password1 and len(password1) < 3:
+            raise ValidationError(
+                _(
+                    "Этот пароль слишком короткий. "
+                    "Он должен содержать не менее 3 символов."
+                ),
+                code="password_too_short",
+            )
+        return password1
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        password1 = self.cleaned_data.get("password1")
+        if password1:
+            user.set_password(password1)
+        if commit:
+            user.save()
+        return user

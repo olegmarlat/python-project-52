@@ -6,6 +6,32 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 
+class LoginRequiredMessageMixin:
+    login_url = "login"
+    permission_denied_message = _("You must be logged in to access this page.")
+
+    def handle_no_permission(self):
+        messages.error(
+            self.request,
+            _("You must be logged in to access this page.")
+        )
+        return redirect(self.login_url)
+
+
+class ProtectedObjectMixin:
+    protected_object_url = None
+    protected_object_message = _(
+        "This object cannot be deleted because it is in use."
+    )
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except Exception:
+            messages.error(self.request, self.protected_object_message)
+            return redirect(self.protected_object_url)
+
+
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     login_url = reverse_lazy("login")
     redirect_field_name = None
