@@ -28,7 +28,7 @@ def task_create(request):
 def task_update(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if task.author != request.user:
-        messages.error(request, "Вы не можете редактировать чужую задачу.")
+        messages.error(request, "Задачу может изменить только ее автор")
         return redirect("tasks_list")
     if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
@@ -45,7 +45,7 @@ def task_update(request, pk):
 def task_delete(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if task.author != request.user:
-        messages.error(request, "Вы не можете удалить чужую задачу!")
+        messages.error(request, "Задачу может удалить только ее автор")
         return redirect("tasks_list")
     if request.method == "POST":
         task.delete()
