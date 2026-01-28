@@ -3,9 +3,7 @@
 
 {% block content %}
   <h1 class="my-4">Удалить статус "{{ status.name }}"?</h1>
-    <p>
-      {% blocktrans %}Are you sure you want to delete {{ status }}?{% endblocktrans %}
-    </p>
+  <p>Вы уверены, что хотите удалить "{{ status.name }}"?</p>
   <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Да, удалить</button>
