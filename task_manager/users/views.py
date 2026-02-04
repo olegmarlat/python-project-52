@@ -62,8 +62,10 @@ class UserLoginView(LoginRequiredMessageMixin, SuccessMessageMixin, CreateView):
 
 class UserLogoutView(View):
     def get(self, request, *args, **kwargs):
+        was_authenticated = request.user.is_authenticated
         logout(request)
-        messages.success(request, _("Вы разлогинены"))
+        if was_authenticated:
+            messages.success(request, _("Вы разлогинены"))
         return redirect("index")
 
 
