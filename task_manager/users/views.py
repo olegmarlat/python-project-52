@@ -10,6 +10,7 @@ from django.views.generic import (
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.views import View
 from django.contrib import messages
 from task_manager.mixins import (
     LoginRequiredMessageMixin,
@@ -59,7 +60,7 @@ class UserLoginView(LoginRequiredMessageMixin, SuccessMessageMixin, CreateView):
         return self.form_invalid(form)
 
 
-class UserLogoutView(LoginRequiredMixin, CreateView):
+class UserLogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         messages.success(request, _("Вы разлогинены"))
