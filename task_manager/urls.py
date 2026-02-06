@@ -12,9 +12,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("login/", UserLoginView.as_view(), name="login"),
     path("logout/", UserLogoutView.as_view(), name="logout"),
-    path("users/create/", UserCreateView.as_view(), name="register"),  # ← register для тестов
+    path("users/create/", UserCreateView.as_view(), name="register"),
     path("users/", include("task_manager.users.urls")),
-    path("statuses/", include("task_manager.statuses.urls", namespace="statuses")),
+    path("statuses/",
+         include("task_manager.statuses.urls", namespace="statuses")),
     path("labels/", include("task_manager.labels.urls", namespace="labels")),
     path("tasks/", include("task_manager.tasks.urls")),
 ]

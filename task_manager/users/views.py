@@ -22,9 +22,14 @@ User = get_user_model()
 USERS_INDEX_URL = "users:index"
 
 
+class UsersIndexView(ListView):
+    model = User
+    template_name = 'users/index.html'
+    context_object_name = 'users'
+
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
-    template_name = "users/user_form.html"
+    template_name = "users/register.html"
     success_url = reverse_lazy("login")
     success_message = _("Пользователь успешно зарегистрирован")
     extra_context = {
@@ -37,7 +42,8 @@ class UserCreateView(SuccessMessageMixin, CreateView):
         return UserCreationForm
 
 
-class UserLoginView(LoginRequiredMessageMixin, SuccessMessageMixin, CreateView):
+class UserLoginView(LoginRequiredMessageMixin,
+                    SuccessMessageMixin, CreateView):
     template_name = "users/login.html"
     success_url = reverse_lazy("index")
     success_message = _("Вы залогинены")
@@ -71,7 +77,7 @@ class UserLogoutView(View):
 
 class UserListView(LoginRequiredMixin, ListView):
     model = User
-    template_name = "users/users_list.html"
+    template_name = "users/user_list.html"
     context_object_name = "users"
 
 
@@ -81,7 +87,7 @@ class UserUpdateView(
     UpdateView
 ):
     model = User
-    template_name = "users/user_form.html"
+    template_name = "users/user_edit.html"
     success_url = reverse_lazy(USERS_INDEX_URL)
     success_message = _("Пользователь успешно изменен")
     permission_denied_message = _(
@@ -104,7 +110,7 @@ class UserDeleteView(
     DeleteView
 ):
     model = User
-    template_name = "users/user_confirm_delete.html"
+    template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
     permission_denied_message = _(

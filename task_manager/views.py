@@ -7,6 +7,7 @@ from django.views.generic import (
     DeleteView,
     ListView,
 )
+from django.views.generic.edit import FormView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from task_manager.mixins import (
@@ -19,9 +20,15 @@ User = get_user_model()
 USERS_INDEX_URL = "users:index"
 
 
+class UsersIndexView(ListView):
+    model = User
+    template_name = 'users/index.html'
+    context_object_name = 'users'
+
+
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
-    template_name = "users/user_form.html"
+    template_name = "users/registration_form.html"
     success_url = reverse_lazy("login")
     success_message = _("Пользователь успешно зарегистрирован")
     extra_context = {
@@ -29,12 +36,8 @@ class UserCreateView(SuccessMessageMixin, CreateView):
         "button_text": _("Зарегистрироваться"),
     }
 
-    def get_form_class(self):
-        from .forms import UserCreationForm
-        return UserCreationForm
 
-
-class UserLoginView(LoginRequiredMessageMixin, SuccessMessageMixin, CreateView):
+class UserLoginView(LoginRequiredMessageMixin, SuccessMessageMixin, FormView):
     template_name = "users/login.html"
     success_url = reverse_lazy("index")
     success_message = _("Вы залогинены")
