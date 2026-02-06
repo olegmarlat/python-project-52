@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-06 19:43+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: task_manager/labels/mixins.py:11 task_manager/mixins.py:11
+#: task_manager/mixins.py:16 task_manager/mixins.py:40
+msgid "You must be logged in to access this page."
+msgstr "Для доступа к этой странице необходимо войти в систему."
+
+#: task_manager/labels/models.py:10
+msgid "Name"
+msgstr "Имя"
+
+#: task_manager/labels/models.py:19
+msgid "Label"
+msgstr "Этикетка"
+
+#: task_manager/labels/models.py:20
+msgid "Labels"
+msgstr "Этикетки"
+
+#: task_manager/labels/views.py:26
+msgid "Метка успешно создана"
+msgstr "Метка успешно создана"
+
+#: task_manager/labels/views.py:34
+msgid "Метка успешно изменена"
+msgstr "Метка успешно создана"
+
+#: task_manager/labels/views.py:41
+msgid "Метка успешно удалена"
+msgstr "Метка успешно удалена"
+
+#: task_manager/mixins.py:24 task_manager/mixins.py:47
+msgid "This object cannot be deleted because it is in use."
+msgstr "Этот объект нельзя удалить, поскольку он используется."
+
+#: task_manager/settings.py:175
+msgid "English"
+msgstr "Английский"
+
+#: task_manager/settings.py:176
+msgid "Russian"
+msgstr "Русский"
+
+#: task_manager/users/forms.py:11
+msgid "Пароль"
+msgstr "Пароль"
+
+#: task_manager/users/forms.py:16
+msgid "Подтверждение пароля"
+msgstr "Подтверждение пароля"
+
+#: task_manager/users/forms.py:29 task_manager/users/forms.py:86
+msgid "Имя"
+msgstr "Имя"
+
+#: task_manager/users/forms.py:30 task_manager/users/forms.py:87
+msgid "Фамилия"
+msgstr "Фамилия"
+
+#: task_manager/users/forms.py:31 task_manager/users/forms.py:88
+msgid "Имя пользователя"
+msgstr "Имя пользователя"
+
+#: task_manager/users/forms.py:39 task_manager/users/forms.py:101
+msgid "Пароли не совпадают."
+msgstr "Пароли не совпадают"
+
+#: task_manager/users/forms.py:49 task_manager/users/forms.py:109
+msgid "Этот пароль слишком короткий. Он должен содержать не менее 3 символов."
+msgstr "Этот пароль слишком короткий. Он должен содержать не менее 3 символов."
+
+#: task_manager/users/forms.py:66
+msgid "Новый пароль"
+msgstr "Новый пароль"
+
+#: task_manager/users/forms.py:72
+msgid "Подтверждение нового пароля"
+msgstr "Подтверждение нового пароля"
+
+#: task_manager/users/forms.py:98
+msgid "Пожалуйста, заполните оба поля для пароля."
+msgstr "Пожалуйста, заполните оба поля для пароля."
+
+#: task_manager/users/models.py:7
+msgid "first name"
+msgstr "Имя"
+
+#: task_manager/users/models.py:8
+msgid "last name"
+msgstr "Фамилия"
+
+#: task_manager/users/views.py:29 task_manager/views.py:26
+msgid "Пользователь успешно зарегистрирован"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: task_manager/users/views.py:31 task_manager/views.py:28
+msgid "Регистрация"
+msgstr ""
+
+#: task_manager/users/views.py:32 task_manager/views.py:29
+msgid "Зарегистрироваться"
+msgstr "Регистрация"
+
+#: task_manager/users/views.py:43 task_manager/views.py:40
+msgid "Вы залогинены"
+msgstr "Вы залогинены"
+
+#: task_manager/users/views.py:45 task_manager/views.py:42
+msgid "Вход"
+msgstr "Вход"
+
+#: task_manager/users/views.py:46 task_manager/views.py:43
+msgid "Войти"
+msgstr "Войти"
+
+#: task_manager/users/views.py:68 task_manager/views.py:52
+msgid "Вы разлогинены"
+msgstr "Вы разлогинены"
+
+#: task_manager/users/views.py:86 task_manager/views.py:69
+msgid "Пользователь успешно изменен"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/users/views.py:88 task_manager/users/views.py:111
+#: task_manager/users/views.py:114 task_manager/views.py:71
+#: task_manager/views.py:94 task_manager/views.py:97
+msgid "У вас нет прав для изменения другого пользователя."
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: task_manager/users/views.py:91 task_manager/views.py:74
+msgid "Редактировать профиль"
+msgstr "Редактировать профиль"
+
+#: task_manager/users/views.py:92 task_manager/views.py:75
+msgid "Изменить"
+msgstr "Изменить"
+
+#: task_manager/users/views.py:109 task_manager/views.py:92
+msgid "Пользователь успешно удален"
+msgstr "Пользователь успешно удален"
+
+#: task_manager/users/views.py:118 task_manager/views.py:101
+msgid "Невозможно удалить пользователя, потому что он используется"
+msgstr "Невозможно удалить пользователя, потому что он используется"
+
+#: task_manager/users/views.py:121 task_manager/views.py:104
+msgid "Удаление пользователя"
+msgstr "Удаление пользователя"
+
+#: task_manager/users/views.py:122 task_manager/views.py:105
+msgid "Да, удалить"
+msgstr "Да, удалить"
