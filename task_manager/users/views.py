@@ -30,7 +30,7 @@ class UsersIndexView(ListView):
 
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
-    template_name = "users/register.html"
+    template_name = "users/registration_form.html"
     success_url = reverse_lazy("login")
     success_message = _("Пользователь успешно зарегистрирован")
     extra_context = {
