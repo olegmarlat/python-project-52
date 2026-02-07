@@ -80,12 +80,10 @@ class UserUpdateForm(forms.ModelForm):
         fields = (
             "first_name",
             "last_name",
-            "username",
         )
         labels = {
             "first_name": _("Имя"),
             "last_name": _("Фамилия"),
-            "username": _("Имя пользователя"),
         }
 
     def clean_password2(self):
