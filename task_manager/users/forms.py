@@ -76,7 +76,6 @@ class UserUpdateForm(forms.ModelForm):
     )
     username = forms.CharField(
         label=_("Имя пользователя"),
-        disabled=True,
         required=False,
     )
 
