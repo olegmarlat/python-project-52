@@ -74,10 +74,16 @@ class UserUpdateForm(forms.ModelForm):
         strip=False,
         required=False,
     )
+    username = forms.CharField(
+        label=_("Имя пользователя"),
+        disabled=True,
+        required=False,
+    )
 
     class Meta:
         model = User
         fields = (
+            "username",
             "first_name",
             "last_name",
         )
