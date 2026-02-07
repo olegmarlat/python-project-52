@@ -63,13 +63,13 @@ class UserCreationForm(forms.ModelForm):
 
 class UserUpdateForm(forms.ModelForm):
     password1 = forms.CharField(
-        label=_("Новый пароль"),
+        label=_("Пароль"),
         widget=forms.PasswordInput,
         strip=False,
         required=False,
     )
     password2 = forms.CharField(
-        label=_("Подтверждение нового пароля"),
+        label=_("Подтверждение пароля"),
         widget=forms.PasswordInput,
         strip=False,
         required=False,
