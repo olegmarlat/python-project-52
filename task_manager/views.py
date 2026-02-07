@@ -80,10 +80,6 @@ class UserUpdateView(
         "button_text": _("Изменить"),
     }
 
-    def get_form_class(self):
-        from .forms import UserUpdateForm
-        return UserUpdateForm
-
 
 class UserDeleteView(
     LoginRequiredMixin,

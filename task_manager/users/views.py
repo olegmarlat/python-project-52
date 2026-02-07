@@ -27,6 +27,7 @@ class UsersIndexView(ListView):
     template_name = 'users/index.html'
     context_object_name = 'users'
 
+
 class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
     template_name = "users/register.html"
@@ -62,6 +63,7 @@ class UserLoginView(LoginRequiredMessageMixin,
         user = authenticate(self.request, username=username, password=password)
         if user is not None:
             login(self.request, user)
+            messages.success(self.request, _("Вы залогинены"))
             return redirect(self.get_success_url())
         return self.form_invalid(form)
 

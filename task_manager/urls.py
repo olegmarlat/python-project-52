@@ -3,7 +3,6 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from task_manager.users.views import (
     UserCreateView,
-    UserLoginView,
     UserLogoutView,
 )
 from django.contrib.auth import views as auth_views
