@@ -7,11 +7,11 @@ from django.views.generic import (
     DeleteView,
     ListView,
 )
-from django.views.generic.edit import FormView
+from django.contrib.auth.views import LoginView as BaseLoginView
+from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from task_manager.mixins import (
-    LoginRequiredMessageMixin,
     ProtectedObjectMixin,
 )
 
@@ -37,7 +37,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
     }
 
 
-class UserLoginView(LoginRequiredMessageMixin, SuccessMessageMixin, FormView):
+class UserLoginView(BaseLoginView):
     template_name = "users/login.html"
     success_url = reverse_lazy("index")
     success_message = _("Вы залогинены")
@@ -46,12 +46,14 @@ class UserLoginView(LoginRequiredMessageMixin, SuccessMessageMixin, FormView):
         "button_text": _("Войти"),
     }
 
-    def get_form_class(self):
-        from django.contrib.auth.forms import AuthenticationForm
-        return AuthenticationForm
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.pop('instance', None)
+        return kwargs
 
 
-class UserLogoutView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class UserLogoutView(SuccessMessageMixin, BaseLogoutView):
+    next_page = reverse_lazy('index')
     success_message = _("Вы разлогинены")
 
 
