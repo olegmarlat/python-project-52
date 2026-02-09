@@ -6,11 +6,10 @@ from task_manager.users.views import (
     UserLogoutView,
 )
 from django.contrib.auth import views as auth_views
-from .views import IndexView
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    # path("", TemplateView.as_view(template_name="index.html"), name="index"),
-    path("", IndexView.as_view(), name="index"),
+    path("", TemplateView.as_view(template_name="index.html"), name="index"),
     path("admin/", admin.site.urls),
     # path("login/", UserLoginView.as_view(), name="login"),
     path("logout/", UserLogoutView.as_view(), name="logout"),

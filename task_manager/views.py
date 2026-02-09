@@ -15,7 +15,7 @@ from task_manager.mixins import (
     ProtectedObjectMixin,
 )
 from django.contrib.auth import logout
-from django.views.generic import TemplateView
+
 
 User = get_user_model()
 
@@ -107,12 +107,3 @@ class UserDeleteView(
         "title": _("Удаление пользователя"),
         "button_text": _("Да, удалить"),
     }
-
-
-class IndexView(TemplateView):
-    template_name = 'index.html'
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            logout(request)
-        return super().get(request, *args, **kwargs)
