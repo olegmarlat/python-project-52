@@ -114,5 +114,5 @@ class IndexView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            logout(request)  # Выходим из системы
+            logout(request)
         return super().get(request, *args, **kwargs)
