@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+<<<<<<< HEAD
 from django.db.models import ProtectedError
+=======
+from django.db.models import ProtectedError 
+>>>>>>> 54d926f (modified:   task_manager/statuses/views.py)
 from .models import Status
 from .forms import StatusForm
 from django.contrib.auth.decorators import login_required
