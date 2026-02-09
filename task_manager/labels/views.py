@@ -1,41 +1,45 @@
-from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.utils.translation import gettext as _
-from django.views.generic import (
-    CreateView,
-    UpdateView,
-    DeleteView,
-    ListView,
-)
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from .models import Label
-from .forms import LabelForm
 
 
-class LabelListView(LoginRequiredMixin, ListView):
+class LabelListView(ListView):
     model = Label
-    template_name = "labels/labels_list.html"
-    context_object_name = "labels"
+    template_name = 'labels/label_list.html'
+    context_object_name = 'labels'
 
 
-class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class LabelCreateView(CreateView):
     model = Label
-    form_class = LabelForm
-    template_name = "labels/label_form.html"
-    success_url = reverse_lazy("labels:labels_list")
-    success_message = _("Метка успешно создана")
+    template_name = 'labels/label_form.html'
+    fields = ['name']
+    success_url = reverse_lazy('labels:label_list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Метка успешно создана')
+        return response
 
 
-class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class LabelUpdateView(UpdateView):
     model = Label
-    form_class = LabelForm
-    template_name = "labels/label_form.html"
-    success_url = reverse_lazy("labels:labels_list")
-    success_message = _("Метка успешно изменена")
+    template_name = 'labels/label_form.html'
+    fields = ['name']
+    success_url = reverse_lazy('labels:label_list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Метка успешно изменена')
+        return response
 
 
-class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class LabelDeleteView(DeleteView):
     model = Label
-    template_name = "labels/label_confirm_delete.html"
-    success_url = reverse_lazy("labels:labels_list")
-    success_message = _("Метка успешно удалена")
+    template_name = 'labels/label_confirm_delete.html'
+    success_url = reverse_lazy('labels:label_list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'Метка успешно удалена')
+        return response

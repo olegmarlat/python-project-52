@@ -4,8 +4,8 @@ from . import views
 app_name = 'labels'
 
 urlpatterns = [
-    path("", views.LabelListView.as_view(), name="index"),  # ← index вместо labels_list
+    path("", views.LabelListView.as_view(), name="label_list"),
     path("create/", views.LabelCreateView.as_view(), name="create"),
     path("<int:pk>/update/", views.LabelUpdateView.as_view(), name="update"),
-    path("<int:pk>/delete/", views.LabelDeleteView.as_view(), name="delete"),  # ← delete вместо label_delete
+    path("<int:pk>/delete/", views.LabelDeleteView.as_view(), name="delete"),
 ]
