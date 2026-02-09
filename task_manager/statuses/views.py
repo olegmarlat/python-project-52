@@ -42,12 +42,14 @@ class StatusUpdateView(UpdateView):
 class StatusDeleteView(DeleteView):
     model = Status
     template_name = 'statuses/status_confirm_delete.html'
+    fields = ['name']
     success_url = reverse_lazy('statuses:statuses_list')
-    
+
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(self.request, 'Статус успешно удален')
         return response
+
 
 @login_required
 def statuses_list(request):
