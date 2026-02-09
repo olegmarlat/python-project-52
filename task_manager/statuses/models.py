@@ -2,8 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class TaskStatus(models.Model):
-    """Модель статуса задачи"""
+class Status(models.Model):
     name = models.CharField(
         max_length=150,
         unique=True,
@@ -18,6 +17,6 @@ class TaskStatus(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = _('Статус задачи')
-        verbose_name_plural = _('Статусы задач')
+        verbose_name = _('Статус')
+        verbose_name_plural = _('Статусы')
         ordering = ['-created_at']
