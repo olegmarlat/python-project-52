@@ -1,10 +1,35 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from django.db.models import ProtectedError  # ← ОБЯЗАТЕЛЬНО!
+from django.db.models import ProtectedError
 from .models import Status
 from .forms import StatusForm
 from django.contrib.auth.decorators import login_required
 
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import TaskStatus
+
+class StatusListView(ListView):
+    model = TaskStatus
+    template_name = 'statuses/statuses_list.html'
+    context_object_name = 'statuses'
+
+class StatusCreateView(CreateView):
+    model = TaskStatus
+    template_name = 'statuses/status_form.html'
+    fields = ['name']
+    success_url = reverse_lazy('statuses:statuses_list')
+
+class StatusUpdateView(UpdateView):
+    model = TaskStatus
+    template_name = 'statuses/status_form.html'
+    fields = ['name']
+    success_url = reverse_lazy('statuses:statuses_list')
+
+class StatusDeleteView(DeleteView):
+    model = TaskStatus
+    template_name = 'statuses/status_confirm_delete.html'
+    success_url = reverse_lazy('statuses:statuses_list')
 
 @login_required
 def statuses_list(request):
