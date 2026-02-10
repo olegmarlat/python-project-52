@@ -31,17 +31,6 @@ class TaskFilter(django_filters.FilterSet):
         empty_label="Любая",
     )
 
-    self_tasks = django_filters.BooleanFilter(
-        method="filter_self_tasks",
-        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
-        label="Только мои задачи",
-    )
-
     class Meta:
         model = Task
         fields = []
-
-    def filter_self_tasks(self, queryset, name, value):
-        if value:
-            return queryset.filter(author=self.request.user)
-        return queryset
