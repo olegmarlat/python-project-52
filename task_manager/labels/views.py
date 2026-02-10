@@ -36,7 +36,7 @@ class LabelUpdateView(UpdateView):
 
 class LabelDeleteView(DeleteView):
     model = Label
-    template_name = 'labels/label_confirm_delete.html'
+    template_name = 'labels/label_delete.html'
     success_url = reverse_lazy('labels:label_list')
 
     def form_valid(self, form):
