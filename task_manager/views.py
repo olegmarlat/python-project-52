@@ -14,7 +14,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from task_manager.mixins import (
     ProtectedObjectMixin,
 )
-from django.contrib.auth import logout
 
 
 User = get_user_model()
