@@ -32,6 +32,7 @@ lint-fix:
 
 test:
 	python manage.py loaddata users.json
+	python manage.py loaddata statuses
 	uv run pytest --ds=$(SETTINGS) --reuse-db -xvs
 
 coverage:

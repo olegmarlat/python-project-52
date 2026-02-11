@@ -1,0 +1,23 @@
+[
+  {
+    "model": "statuses.status",
+    "pk": 1,
+    "fields": {
+      "name": "Новый"
+    }
+  },
+  {
+    "model": "statuses.status",
+    "pk": 2,
+    "fields": {
+      "name": "В работе"
+    }
+  },
+  {
+    "model": "statuses.status",
+    "pk": 3,
+    "fields": {
+      "name": "Завершён"
+    }
+  }
+]
