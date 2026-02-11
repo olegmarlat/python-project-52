@@ -3,42 +3,35 @@
     "model": "statuses.status",
     "pk": 1,
     "fields": {
-      "name": "Новый"
+      "name": "first status name"
     }
   },
   {
     "model": "statuses.status",
     "pk": 2,
     "fields": {
-      "name": "В работе"
-    }
-  },
-  {
-    "model": "statuses.status",
-    "pk": 3,
-    "fields": {
-      "name": "Завершён"
+      "name": "second status name"
     }
   },
   {
     "model": "labels.label",
     "pk": 1,
     "fields": {
-      "name": "Важное"
+      "name": "first label name"
     }
   },
   {
     "model": "labels.label",
     "pk": 2,
     "fields": {
-      "name": "Срочное"
+      "name": "second label name"
     }
   },
   {
     "model": "labels.label",
     "pk": 3,
     "fields": {
-      "name": "Баг"
+      "name": "third label name"
     }
   }
 ]
