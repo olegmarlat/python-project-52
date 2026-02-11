@@ -8,9 +8,15 @@
     <a href="{% url 'tasks:create' %}" class="btn btn-primary mb-3">Создать задачу</a>
 
     <form method="get" class="mb-4">
-        {# bootstrap_field filterset.form.status show_label=True #}
-        {# bootstrap_field filterset.form.executor show_label=True #}
-        {# bootstrap_field filterset.form.labels show_label=True #}
+        {% if filterset.form.status %}
+            {% bootstrap_field filterset.form.status show_label=True %}
+        {% endif %}
+        {% if filterset.form.executor %}
+            {% bootstrap_field filterset.form.executor show_label=True %}
+        {% endif %}
+        {% if filterset.form.labels %}
+            {% bootstrap_field filterset.form.labels show_label=True %}
+        {% endif %}
 
         <div class="form-group mb-3">
             <div class="form-check">
