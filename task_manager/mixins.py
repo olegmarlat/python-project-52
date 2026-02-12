@@ -22,18 +22,30 @@ class LoginRequiredMessageMixin:
 class ProtectedObjectMixin:
     protected_object_url = None
     protected_object_message = _(
-        "This object cannot be deleted because it is in use."
+        "Невозможно удалить пользователя, потому что он используется"
     )
 
     def dispatch(self, request, *args, **kwargs):
-        print("=== ProtectedObjectMixin.dispatch ===")
         obj = self.get_object()
+
+        # Проверяем задачи, где пользователь автор
+        tasks_as_author = obj.created_tasks.exists()
+
+        # Проверяем задачи, где пользователь исполнитель
         from task_manager.tasks.models import Task
-        if Task.objects.filter(author=obj).exists():
-            print(f"User has tasks! Redirecting to {self.protected_object_url}")
-            messages.error(self.request, self.protected_object_message)
+        tasks_as_executor = Task.objects.filter(executor=obj).exists()
+
+        print(f"\n=== ProtectedObjectMixin ===")
+        print(f"User: {obj.username}")
+        print(f"Tasks as author: {obj.created_tasks.count()}")
+        print(f"Tasks as executor: {Task.objects.filter(executor=obj).count()}")
+
+        if tasks_as_author or tasks_as_executor:
+            print("!!! ЗАЩИТА СРАБОТАЛА !!!")
+            messages.error(request, self.protected_object_message)
             return redirect(self.protected_object_url)
-            print("User has no tasks, proceeding...")
+
+        print("Нет задач — можно удалять")
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):

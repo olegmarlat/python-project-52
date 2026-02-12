@@ -106,9 +106,9 @@ class UserUpdateView(
 
 
 class UserDeleteView(
+    ProtectedObjectMixin,
     LoginRequiredMixin,
     SuccessMessageMixin,
-    ProtectedObjectMixin,
     DeleteView
 ):
     model = User
