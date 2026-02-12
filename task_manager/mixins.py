@@ -28,24 +28,13 @@ class ProtectedObjectMixin:
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
 
-        # Проверяем задачи, где пользователь автор
-        tasks_as_author = obj.created_tasks.exists()
-
-        # Проверяем задачи, где пользователь исполнитель
         from task_manager.tasks.models import Task
-        tasks_as_executor = Task.objects.filter(executor=obj).exists()
 
-        print(f"\n=== ProtectedObjectMixin ===")
-        print(f"User: {obj.username}")
-        print(f"Tasks as author: {obj.created_tasks.count()}")
-        print(f"Tasks as executor: {Task.objects.filter(executor=obj).count()}")
-
-        if tasks_as_author or tasks_as_executor:
-            print("!!! ЗАЩИТА СРАБОТАЛА !!!")
+        # Проверяем обе связи
+        if obj.created_tasks.exists() or Task.objects.filter(executor=obj).exists():
             messages.error(request, self.protected_object_message)
             return redirect(self.protected_object_url)
 
-        print("Нет задач — можно удалять")
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
