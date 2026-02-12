@@ -7,13 +7,13 @@
     
     <a href="{% url 'tasks:create' %}" class="btn btn-primary mb-3">Создать задачу</a>
 
-    <!-- ФОРМА ФИЛЬТРОВ ВРЕМЕННО ЗАКОММЕНТИРОВАНА -->
     <!--
+    
     <form method="get" class="mb-4" id="task-filters">
         {% bootstrap_field filterset.form.status show_label=True %}
         {% bootstrap_field filterset.form.executor show_label=True %}
         {% bootstrap_field filterset.form.labels show_label=True %}
-
+    -->
         <div class="form-group mb-3">
             <div class="form-check">
                 <input type="checkbox"
@@ -30,7 +30,7 @@
         <button type="submit" class="btn btn-primary">Показать</button>
         <a href="{% url 'tasks:tasks_list' %}" class="btn btn-secondary">Сбросить</a>
     </form>
-    -->
+    
 
     <table class="table table-striped" style="table-layout: fixed;">
         <thead>
