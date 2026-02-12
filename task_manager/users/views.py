@@ -112,7 +112,7 @@ class UserDeleteView(
     DeleteView
 ):
     model = User
-    # template_name = "users/user_delete.html"
+    template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
     permission_denied_message = _(
@@ -125,10 +125,7 @@ class UserDeleteView(
     protected_object_message = _(
         "Невозможно удалить пользователя, потому что он используется"
     )
-    extra_context = {
-        "title": _("Удаление пользователя"),
-        "button_text": _("Да, удалить"),
-    }
-
-    def get(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
+    # extra_context = {
+    #   "title": _("Удаление пользователя"),
+    #   "button_text": _("Да, удалить"),
+    # }
