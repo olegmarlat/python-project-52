@@ -26,11 +26,14 @@ class ProtectedObjectMixin:
     )
 
     def dispatch(self, request, *args, **kwargs):
+        print("=== ProtectedObjectMixin.dispatch ===")
         obj = self.get_object()
         from task_manager.tasks.models import Task
         if Task.objects.filter(author=obj).exists():
+            print(f"User has tasks! Redirecting to {self.protected_object_url}")
             messages.error(self.request, self.protected_object_message)
             return redirect(self.protected_object_url)
+            print("User has no tasks, proceeding...")
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -46,7 +49,8 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
     redirect_field_name = None
 
     def handle_no_permission(self):
-        messages.error(self.request, _("You must be logged in to access this page."))
+        messages.error(self.request,
+                       _("You must be logged in to access this page."))
         return redirect(self.login_url)
 
 
