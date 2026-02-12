@@ -3,14 +3,14 @@
     "model": "statuses.status",
     "pk": 1,
     "fields": {
-      "name": "first status name"
+      "name": "Новый"
     }
   },
   {
     "model": "statuses.status",
     "pk": 2,
     "fields": {
-      "name": "second status name"
+      "name": "В работе"
     }
   },
   {
