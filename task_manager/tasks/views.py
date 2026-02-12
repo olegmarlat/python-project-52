@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Task
-from .filters import TaskFilter
+# from .filters import TaskFilter
 
 class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
