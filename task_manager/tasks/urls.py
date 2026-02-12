@@ -3,7 +3,7 @@ from .views import (
     TaskListView,
     TaskCreateView,
     TaskUpdateView,
-    TaskDeleteView,  
+    TaskDeleteView,
 )
 
 app_name = 'tasks'

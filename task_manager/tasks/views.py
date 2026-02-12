@@ -1,25 +1,42 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django_filters.views import FilterView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Task
-# from .filters import TaskFilter
+from .filters import TaskFilter
+
 
 class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
     template_name = 'tasks/task_list.html'
     context_object_name = 'tasks'
-    filterset_class = None
+    filterset_class = TaskFilter
+    login_url = 'login'
 
     def get_queryset(self):
-        return Task.objects.all().select_related('author', 'executor', 'status')
-        
+        return Task.objects.all().select_related(
+            'author', 'executor', 'status'
+        ).prefetch_related('labels')
+
+
+class AuthorRequiredMixin:
+
+    def dispatch(self, request, *args, **kwargs):
+        task = self.get_object()
+        if task.author != request.user:
+            messages.error(request, 'У вас нет прав для изменения этой задачи')
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     template_name = 'tasks/task_form.html'
     fields = ['name', 'description', 'status', 'executor', 'labels']
     success_url = reverse_lazy('tasks:tasks_list')
+    login_url = 'login'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -28,11 +45,12 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
         return response
 
 
-class TaskUpdateView(LoginRequiredMixin, UpdateView):
+class TaskUpdateView(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
     model = Task
     template_name = 'tasks/task_form.html'
     fields = ['name', 'description', 'status', 'executor', 'labels']
     success_url = reverse_lazy('tasks:tasks_list')
+    login_url = 'login'
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -40,10 +58,11 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
         return response
 
 
-class TaskDeleteView(LoginRequiredMixin, DeleteView):
+class TaskDeleteView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     model = Task
     template_name = 'tasks/task_confirm_delete.html'
     success_url = reverse_lazy('tasks:tasks_list')
+    login_url = 'login'
 
     def form_valid(self, form):
         response = super().form_valid(form)

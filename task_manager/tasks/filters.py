@@ -1,5 +1,6 @@
-# tasks/filters.py
+# task_manager/tasks/filters.py
 import django_filters
+from django import forms
 from django.contrib.auth import get_user_model
 from .models import Task
 from task_manager.statuses.models import Status
@@ -24,8 +25,20 @@ class TaskFilter(django_filters.FilterSet):
     labels = django_filters.ModelMultipleChoiceFilter(
         queryset=Label.objects.all(),
         label="Метка",
+        widget=forms.SelectMultiple(attrs={'class': 'form-select'}),
+    )
+
+    self_tasks = django_filters.BooleanFilter(
+        method='filter_self_tasks',
+        label="Только свои задачи",
+        widget=forms.CheckboxInput,
     )
 
     class Meta:
         model = Task
         fields = ['status', 'executor', 'labels']
+
+    def filter_self_tasks(self, queryset, name, value):
+        if value:
+            return queryset.filter(author=self.request.user)
+        return queryset
