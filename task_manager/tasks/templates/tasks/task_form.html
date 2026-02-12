@@ -8,7 +8,32 @@
     
     <form method="post">
       {% csrf_token %}
-      {% form %}
+
+      <div class="mb-3">
+        <label for="id_name" class="form-label">Имя</label>
+        <input type="text" name="name" class="form-control" id="id_name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_description" class="form-label">Описание</label>
+        <textarea name="description" class="form-control" id="id_description"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_status" class="form-label">Статус</label>
+        <select name="status" class="form-select" id="id_status" required>
+          <!-- опции статусов -->
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_executor" class="form-label">Исполнитель</label>
+        <select name="executor" class="form-select" id="id_executor">
+     
+        </select>
+      </div>
+
+      {% bootstrap_field form.labels %}
       
       <button type="submit" class="btn btn-primary">
         {% if form.instance.pk %}Изменить{% else %}Создать{% endif %}
