@@ -4,6 +4,7 @@ from django.db import IntegrityError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.db.models import ProtectedError
 
 
 class LoginRequiredMessageMixin:
@@ -24,10 +25,18 @@ class ProtectedObjectMixin:
         "This object cannot be deleted because it is in use."
     )
 
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        from task_manager.tasks.models import Task
+        if Task.objects.filter(author=obj).exists():
+            messages.error(self.request, self.protected_object_message)
+            return redirect(self.protected_object_url)
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
-        except Exception:
+        except ProtectedError:
             messages.error(self.request, self.protected_object_message)
             return redirect(self.protected_object_url)
 
