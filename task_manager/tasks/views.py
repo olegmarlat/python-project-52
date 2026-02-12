@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Task
 from django_filters.views import ListView
-from .filters import TaskFilter
+# from .filters import TaskFilter
 
 
 class TaskListView(LoginRequiredMixin, ListView):
