@@ -1,6 +1,13 @@
 from django.urls import path
 from . import views
 
+from .views import (
+    UserListView,
+    UserCreateView,
+    UserUpdateView,
+    UserDeleteView,
+)
+
 app_name = 'users'
 
 urlpatterns = [
