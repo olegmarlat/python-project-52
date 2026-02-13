@@ -54,9 +54,8 @@
                             <a href="{% url 'users:update' user_obj.id %}" class="btn btn-outline-primary">
                                 Редактировать
                             </a>
-                        {% endif %}
-                        
-                        {% if user.is_authenticated %}
+                            
+                            {# ВРЕМЕННО ДЛЯ ТЕСТОВ: показываем кнопку удаления всем #}
                             <a href="{% url 'users:delete' user_obj.id %}" class="btn btn-outline-danger">
                                 Удалить
                             </a>
