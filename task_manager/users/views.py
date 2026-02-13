@@ -105,7 +105,6 @@ class UserUpdateView(
         from .forms import UserUpdateForm
         return UserUpdateForm
 
-
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
@@ -124,6 +123,5 @@ class UserDeleteView(
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
         
-        # ВСЕГДА показываем страницу подтверждения
-        # Убираем всю логику с проверкой задач
         return super().dispatch(request, *args, **kwargs)
+    
