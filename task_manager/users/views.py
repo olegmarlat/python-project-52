@@ -117,6 +117,7 @@ class UserDeleteView(
 
     def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
+        
         if user == request.user:
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
@@ -125,9 +126,3 @@ class UserDeleteView(
             return redirect(self.success_url)
         return super().dispatch(request, *args, **kwargs)
     
-  """ def delete(self, request, *args, **kwargs):
-        user = self.get_object()
-        if user == request.user:
-            messages.error(request, _("Вы не можете удалить свой аккаунт"))
-            return redirect(self.success_url)
-        return super().delete(request, *args, **kwargs) """
