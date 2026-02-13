@@ -116,7 +116,7 @@ class UserDeleteView(
     success_message = _("Пользователь успешно удален")
 
     def dispatch(self, request, *args, **kwargs):
-        user = self.get_object)
+        user = self.get_object()
         if user == request.user:
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
