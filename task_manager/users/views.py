@@ -112,7 +112,7 @@ class UserDeleteView(
 ):
     model = User
     template_name = "users/user_delete.html"
-    success_url = reverse_lazy("users:index")
+    success_url = reverse_lazy(USERS_INDEX_URL)
     success_message = _("Пользователь успешно удален")
 
     def dispatch(self, request, *args, **kwargs):
@@ -123,5 +123,13 @@ class UserDeleteView(
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
         
+        # Если у пользователя есть задачи - показываем подтверждение
+        if user.created_tasks.exists() or user.assigned_tasks.exists():
+            # УБИРАЕМ REDIRECT! Просто показываем страницу
+            return super().dispatch(request, *args, **kwargs)
+        
+        # Если задач нет - удаляем сразу
+        if request.method == "GET":
+            return self.delete(request, *args, **kwargs)
+        
         return super().dispatch(request, *args, **kwargs)
-    
