@@ -1,34 +1,20 @@
-<!-- templates/users/user_delete.html -->
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load django_bootstrap5 %}
 
 {% block title %}Удаление пользователя{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-5">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Подтверждение удаления</h4>
-            </div>
-            <div class="card-body text-center">
-                <div class="mb-4">
-                    <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
-                </div>
-                
-                <h5>Вы уверены, что хотите удалить пользователя?</h5>
-                <p class="text-muted">Пользователь: <strong>{{ user.username }}</strong></p>
-                <p class="text-danger">Это действие нельзя отменить!</p>
-                
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-danger">Да, удалить</button>
-                        <a href="{% url 'users:index' %}" class="btn btn-secondary">Отмена</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="container mt-4">
+    <h1>Удаление пользователя</h1>
+    
+    <p>Вы уверены, что хотите удалить пользователя "{{ object.username }}"?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+            Да, удалить  <!-- ТОЧНО ТАК, КАК В ТЕСТЕ -->
+        </button>
+        <a href="{% url 'users:index' %}" class="btn btn-secondary">Отмена</a>
+    </form>
 </div>
 {% endblock %}
