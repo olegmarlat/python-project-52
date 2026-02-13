@@ -111,12 +111,12 @@ class UserDeleteView(
     DeleteView
 ):
     model = User
-    template_name = "users/user_confirm_delete.html"
+    template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
 
     def dispatch(self, request, *args, **kwargs):
-        self.user = self.get_object()  # Сохраняем пользователя
+        self.user = self.get_object()
         
         # Нельзя удалить самого себя
         if self.user == request.user:
