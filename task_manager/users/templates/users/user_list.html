@@ -50,15 +50,13 @@
                 </td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        {# Редактировать могут все авторизованные (права проверит вьюха) #}
                         {% if user.is_authenticated %}
                             <a href="{% url 'users:update' user_obj.id %}" class="btn btn-outline-primary">
                                 Редактировать
                             </a>
                         {% endif %}
                         
-                        {# Удалить могут все авторизованные, КРОМЕ СЕБЯ (права проверит вьюха) #}
-                        {% if user.is_authenticated and user.id != user_obj.id %}
+                        {% if user.is_authenticated and user.is_staff and user.id != user_obj.id %}
                             <a href="{% url 'users:delete' user_obj.id %}" class="btn btn-outline-danger">
                                 Удалить
                             </a>
