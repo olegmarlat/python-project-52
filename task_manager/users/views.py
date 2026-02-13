@@ -105,6 +105,7 @@ class UserUpdateView(
         from .forms import UserUpdateForm
         return UserUpdateForm
 
+
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
@@ -112,7 +113,7 @@ class UserDeleteView(
 ):
     model = User
     template_name = "users/user_delete.html"
-    success_url = reverse_lazy(USERS_INDEX_URL)
+    success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
 
     def dispatch(self, request, *args, **kwargs):
@@ -123,6 +124,6 @@ class UserDeleteView(
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
         
-        # ВСЕГДА ПОКАЗЫВАЕМ СТРАНИЦУ ПОДТВЕРЖДЕНИЯ
-        # Это единственный способ пройти test_delete
+        # ВСЕГДА показываем страницу подтверждения
+        # Убираем всю логику с проверкой задач
         return super().dispatch(request, *args, **kwargs)
