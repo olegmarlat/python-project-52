@@ -111,19 +111,13 @@ class UserDeleteView(
     DeleteView
 ):
     model = User
+    template_name = "users/user_confirm_delete.html"  # ВЕРНУТЬ!
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
-
-    def get(self, request, *args, **kwargs):
-        """Удаление по GET-запросу (требование тестов Хекслета)"""
-        return self.delete(request, *args, **kwargs)
-
+    
     def delete(self, request, *args, **kwargs):
         user = self.get_object()
-
-        # Нельзя удалить самого себя
         if user == request.user:
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
-
         return super().delete(request, *args, **kwargs)
