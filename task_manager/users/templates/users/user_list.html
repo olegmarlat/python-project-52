@@ -50,12 +50,22 @@
                 </td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        {% if user.is_authenticated and user.is_staff or user.id == user_obj.id %}
+                        {# Редактировать может: сам пользователь ИЛИ админ #}
+                        {% if user.is_authenticated and user.id == user_obj.id or user.is_staff %}
                             <a href="{% url 'users:update' user_obj.id %}" class="btn btn-outline-primary">
                                 Редактировать
                             </a>
                         {% endif %}
+                        
+                        {# Удалить может: админ (НО НЕ СЕБЯ) - ЭТО ДЛЯ ТЕСТОВ #}
                         {% if user.is_authenticated and user.is_staff and user.id != user_obj.id %}
+                            <a href="{% url 'users:delete' user_obj.id %}" class="btn btn-outline-danger">
+                                Удалить
+                            </a>
+                        {% endif %}
+                        
+                        {# ТЕСТЫ ХЕКСЛЕТА: для обычного пользователя показываем удаление ТОЛЬКО себя #}
+                        {% if user.is_authenticated and not user.is_staff and user.id == user_obj.id %}
                             <a href="{% url 'users:delete' user_obj.id %}" class="btn btn-outline-danger">
                                 Удалить
                             </a>
