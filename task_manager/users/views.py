@@ -105,7 +105,6 @@ class UserUpdateView(
         from .forms import UserUpdateForm
         return UserUpdateForm
 
-
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
@@ -124,8 +123,10 @@ class UserDeleteView(
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
         
-        # Если у пользователя есть задачи - показываем подтверждение
+        # Проверяем, есть ли у пользователя задачи
         if user.created_tasks.exists() or user.assigned_tasks.exists():
+            messages.error(request, _("Невозможно удалить пользователя, потому что он используется"))
+            # ВСЁ РАВНО ПОКАЗЫВАЕМ СТРАНИЦУ ПОДТВЕРЖДЕНИЯ
             return super().dispatch(request, *args, **kwargs)
         
         # Если задач нет - удаляем сразу (GET → delete)
