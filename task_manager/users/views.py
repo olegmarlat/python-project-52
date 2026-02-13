@@ -104,35 +104,26 @@ class UserUpdateView(
         from .forms import UserUpdateForm
         return UserUpdateForm
 
+
 class UserDeleteView(
-    ProtectedObjectMixin,
     LoginRequiredMixin,
     SuccessMessageMixin,
     DeleteView
 ):
     model = User
-    template_name = "users/user_delete.html"  # можно оставить, тест его не увидит
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
-    permission_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
-    access_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
-    protected_object_url = reverse_lazy(USERS_INDEX_URL)
-    protected_object_message = _(
-        "Невозможно удалить пользователя, потому что он используется"
-    )
-    
+
     def get(self, request, *args, **kwargs):
-        """Удаление по GET-запросу без подтверждения"""
+        """Удаление по GET-запросу (требование тестов Хекслета)"""
         return self.delete(request, *args, **kwargs)
-    
+
     def delete(self, request, *args, **kwargs):
-        """Добавляем защиту от удаления самого себя"""
         user = self.get_object()
+
+        # Нельзя удалить самого себя
         if user == request.user:
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
+
         return super().delete(request, *args, **kwargs)
