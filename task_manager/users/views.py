@@ -103,29 +103,19 @@ class UserUpdateView(
     def get_form_class(self):
         from .forms import UserUpdateForm
         return UserUpdateForm
-        
-class UserDeleteView(
-    LoginRequiredMixin,
-    SuccessMessageMixin,
-    DeleteView
-):
-    model = User
-    template_name = "users/user_delete.html"
-    success_url = reverse_lazy("users:index")
-    success_message = _("Пользователь успешно удален")
 
-    def dispatch(self, request, *args, **kwargs):
-        user = self.get_object()
-        
-        # Нельзя удалить самого себя
-        if user == request.user:
-            messages.error(request, _("Вы не можете удалить свой аккаунт"))
-            return redirect(self.success_url)
-        
-        # Проверяем, есть ли у пользователя задачи
-        if user.created_tasks.exists() or user.assigned_tasks.exists():
-            messages.error(request, _("Невозможно удалить пользователя, потому что он используется"))
-            return redirect(self.success_url)
-        
-        # РАЗРЕШАЕМ ПОКАЗАТЬ СТРАНИЦУ ПОДТВЕРЖДЕНИЯ
-        return super().dispatch(request, *args, **kwargs)
+from django.views.generic import TemplateView
+
+class UserDeleteView(LoginRequiredMixin, TemplateView):
+    template_name = "users/user_delete.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'] = get_object_or_404(User, pk=self.kwargs['pk'])
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        user = get_object_or_404(User, pk=kwargs['pk'])
+        user.delete()
+        messages.success(request, _("Пользователь успешно удален"))
+        return redirect('users:index')
