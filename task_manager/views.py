@@ -85,7 +85,7 @@ class UserUpdateView(
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
-    ProtectedObjectMixin,
+    # ProtectedObjectMixin,  # ← ВРЕМЕННО ОТКЛЮЧАЕМ!
     DeleteView
 ):
     model = User
@@ -98,11 +98,21 @@ class UserDeleteView(
     access_denied_message = _(
         "У вас нет прав для изменения другого пользователя."
     )
-    protected_object_url = reverse_lazy(USERS_INDEX_URL)
-    protected_object_message = _(
-        "Невозможно удалить пользователя, потому что он используется"
-    )
+    # protected_object_url = reverse_lazy(USERS_INDEX_URL)
+    # protected_object_message = _(
+    #     "Невозможно удалить пользователя, потому что он используется"
+    # )
     extra_context = {
         "title": _("Удаление пользователя"),
         "button_text": _("Да, удалить"),
     }
+    
+    def dispatch(self, request, *args, **kwargs):
+        user = self.get_object()
+        
+        # Нельзя удалить самого себя
+        if user == request.user:
+            messages.error(request, _("Вы не можете удалить свой аккаунт"))
+            return redirect(self.success_url)
+        
+        return super().dispatch(request, *args, **kwargs)
