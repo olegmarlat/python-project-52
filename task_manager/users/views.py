@@ -1,6 +1,7 @@
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.db.models import ProtectedError
 from django.utils.translation import gettext as _
 from django.views.generic import (
     CreateView,
@@ -104,7 +105,7 @@ class UserUpdateView(
     def get_form_class(self):
         from .forms import UserUpdateForm
         return UserUpdateForm
-
+from django.db.models import ProtectedError
 
 class UserDeleteView(
     LoginRequiredMixin,
@@ -120,16 +121,12 @@ class UserDeleteView(
         "button_text": _("Да, удалить"),
     }
     
-    def dispatch(self, request, *args, **kwargs):
-        user = self.get_object()
-        
-        # Проверяем только авторство задач
-        if Task.objects.filter(author=user).exists():
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
             messages.error(
                 request,
                 _("Невозможно удалить пользователя, потому что он используется")
             )
             return redirect(self.success_url)
-        
-        return super().dispatch(request, *args, **kwargs)
-
