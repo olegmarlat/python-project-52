@@ -111,7 +111,7 @@ class UserDeleteView(
     SuccessMessageMixin,
     DeleteView
 ):
-    model = User
+       model = User
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
@@ -119,11 +119,6 @@ class UserDeleteView(
     def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         
-        # Нельзя удалить самого себя
-        if user == request.user:
-            messages.error(request, _("Вы не можете удалить свой аккаунт"))
-            return redirect(self.success_url)
-
         has_tasks = Task.objects.filter(
             Q(author=user) | Q(executor=user)
         ).exists()
@@ -134,6 +129,5 @@ class UserDeleteView(
                 _("Невозможно удалить пользователя, потому что он используется")
             )
             return redirect(self.success_url)
-
+        
         return super().dispatch(request, *args, **kwargs)
-       
