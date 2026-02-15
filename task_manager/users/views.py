@@ -123,18 +123,17 @@ class UserDeleteView(
         if user == request.user:
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
+
+        has_tasks = Task.objects.filter(
+            Q(author=user) | Q(executor=user)
+        ).exists()
         
-        # ВСЕГДА ПОКАЗЫВАЕМ СТРАНИЦУ ПОДТВЕРЖДЕНИЯ
-        # Никаких проверок на задачи!
-        return super().dispatch(request, *args, **kwargs)
-
-
-    
-    def form_valid(self, form):
-        user = self.get_object()
-        if user.tasks_created.exists():
-            messages.error(self.request, _('''Cannot delete user 
-                                           because it is in use'''))
+        if has_tasks:
+            messages.error(
+                request,
+                _("Невозможно удалить пользователя, потому что он используется")
+            )
             return redirect(self.success_url)
-        messages.success(self.request, _('User successfully deleted'))
-        return super().form_valid(form)
+
+        return super().dispatch(request, *args, **kwargs)
+       
