@@ -11,9 +11,8 @@ from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView as BaseLogoutView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from task_manager.mixins import (
-    ProtectedObjectMixin,
-)
+from django.shortcuts import redirect
+from django.contrib import messages
 
 
 User = get_user_model()
@@ -81,38 +80,27 @@ class UserUpdateView(
         "button_text": _("Изменить"),
     }
 
-
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
-    # ProtectedObjectMixin,  # ← ВРЕМЕННО ОТКЛЮЧАЕМ!
     DeleteView
 ):
     model = User
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
-    permission_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
-    access_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
-    # protected_object_url = reverse_lazy(USERS_INDEX_URL)
-    # protected_object_message = _(
-    #     "Невозможно удалить пользователя, потому что он используется"
-    # )
+
     extra_context = {
         "title": _("Удаление пользователя"),
         "button_text": _("Да, удалить"),
     }
-    
+
     def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
-        
+
         # Нельзя удалить самого себя
         if user == request.user:
             messages.error(request, _("Вы не можете удалить свой аккаунт"))
             return redirect(self.success_url)
-        
+
         return super().dispatch(request, *args, **kwargs)

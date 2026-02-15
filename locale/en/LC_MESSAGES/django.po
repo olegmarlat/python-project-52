@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-11 17:41+0000\n"
+"POT-Creation-Date: 2026-02-15 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: task_manager/labels/mixins.py:11 task_manager/mixins.py:11
-#: task_manager/mixins.py:16 task_manager/mixins.py:40
+#: task_manager/labels/mixins.py:11 task_manager/mixins.py:12
+#: task_manager/mixins.py:17 task_manager/mixins.py:54
 msgid "You must be logged in to access this page."
 msgstr "Для доступа к этой странице необходимо войти в систему."
 
@@ -36,7 +36,11 @@ msgstr "Метка"
 msgid "Метки"
 msgstr "Метки"
 
-#: task_manager/mixins.py:24 task_manager/mixins.py:47
+#: task_manager/mixins.py:25
+msgid "Невозможно удалить пользователя, потому что он используется"
+msgstr "Невозможно удалить пользователя, потому что он используется"
+
+#: task_manager/mixins.py:61
 msgid "This object cannot be deleted because it is in use."
 msgstr "Этот объект нельзя удалить, поскольку он используется."
 
@@ -62,8 +66,8 @@ msgstr "Статус"
 msgid "Статусы"
 msgstr "Статусы"
 
-#: task_manager/users/apps.py:13 task_manager/users/views.py:50
-#: task_manager/users/views.py:66 task_manager/views.py:44
+#: task_manager/users/apps.py:13 task_manager/users/views.py:51
+#: task_manager/users/views.py:67 task_manager/views.py:43
 msgid "Вы залогинены"
 msgstr "Вы залогинены"
 
@@ -113,63 +117,62 @@ msgstr "Вход"
 msgid "Log in"
 msgstr "Войти"
 
-#: task_manager/users/views.py:35 task_manager/views.py:34
+#: task_manager/users/views.py:36 task_manager/views.py:33
 msgid "Пользователь успешно зарегистрирован"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:37 task_manager/views.py:36
+#: task_manager/users/views.py:38 task_manager/views.py:35
 msgid "Регистрация"
 msgstr "Регистрация"
 
-#: task_manager/users/views.py:38 task_manager/views.py:37
+#: task_manager/users/views.py:39 task_manager/views.py:36
 msgid "Зарегистрироваться"
 msgstr "Регистрация"
 
-#: task_manager/users/views.py:52 task_manager/views.py:46
+#: task_manager/users/views.py:53 task_manager/views.py:45
 msgid "Вход"
 msgstr "Вход"
 
-#: task_manager/users/views.py:53 task_manager/views.py:47
+#: task_manager/users/views.py:54 task_manager/views.py:46
 msgid "Войти"
 msgstr "Войти"
 
-#: task_manager/users/views.py:76 task_manager/views.py:58
+#: task_manager/users/views.py:77 task_manager/views.py:57
 msgid "Вы разлогинены"
 msgstr "Вы разлогинены"
 
-#: task_manager/users/views.py:94 task_manager/views.py:75
+#: task_manager/users/views.py:95 task_manager/views.py:74
 msgid "Пользователь успешно изменен"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/users/views.py:96 task_manager/users/views.py:119
-#: task_manager/users/views.py:122 task_manager/views.py:77
-#: task_manager/views.py:96 task_manager/views.py:99
+#: task_manager/users/views.py:97 task_manager/users/views.py:120
+#: task_manager/users/views.py:123 task_manager/views.py:76
 msgid "У вас нет прав для изменения другого пользователя."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:99 task_manager/views.py:80
+#: task_manager/users/views.py:100 task_manager/views.py:79
 msgid "Редактировать профиль"
 msgstr "Редактировать профиль"
 
-#: task_manager/users/views.py:100 task_manager/views.py:81
+#: task_manager/users/views.py:101 task_manager/views.py:80
 msgid "Изменить"
 msgstr "Изменить"
 
-#: task_manager/users/views.py:117 task_manager/views.py:94
+#: task_manager/users/views.py:118 task_manager/views.py:91
 msgid "Пользователь успешно удален"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/users/views.py:126 task_manager/views.py:103
-msgid "Невозможно удалить пользователя, потому что он используется"
-msgstr "Невозможно удалить пользователя, потому что он используется"
-
-#: task_manager/users/views.py:129 task_manager/views.py:106
+#: task_manager/users/views.py:126 task_manager/views.py:94
 msgid "Удаление пользователя"
 msgstr "Удаление пользователя"
 
-#: task_manager/users/views.py:130 task_manager/views.py:107
+#: task_manager/users/views.py:127 task_manager/views.py:95
 msgid "Да, удалить"
 msgstr "Да, удалить"
+
+#: task_manager/users/views.py:135 task_manager/views.py:103
+msgid "Вы не можете удалить свой аккаунт"
+msgstr "Вы не можете удалить свой аккаунт"
 
 #~ msgid "Name"
 #~ msgstr "Имя"
