@@ -9,6 +9,8 @@ from django.views.generic import (
     DeleteView,
     ListView,
 )
+from django.db.models import Q
+from task_manager.tasks.models import Task
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -107,6 +109,8 @@ class UserUpdateView(
         return UserUpdateForm
 from django.db.models import ProtectedError
 
+
+
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
@@ -121,12 +125,14 @@ class UserDeleteView(
         "button_text": _("Да, удалить"),
     }
     
-    def post(self, request, *args, **kwargs):
-        try:
-            return super().post(request, *args, **kwargs)
-        except ProtectedError:
+    def dispatch(self, request, *args, **kwargs):
+        user = self.get_object()
+        
+        if Task.objects.filter(Q(author=user) | Q(executor=user)).exists():
             messages.error(
                 request,
                 _("Невозможно удалить пользователя, потому что он используется")
             )
             return redirect(self.success_url)
+        
+        return super().dispatch(request, *args, **kwargs)
