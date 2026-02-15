@@ -13,6 +13,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.db.models import ProtectedError
 
 
 User = get_user_model()
@@ -80,6 +81,33 @@ class UserUpdateView(
         "button_text": _("Изменить"),
     }
 
+
+
+class UserDeleteView(
+    LoginRequiredMixin,
+    SuccessMessageMixin,
+    DeleteView
+):
+    model = User
+    template_name = "users/user_delete.html"
+    success_url = reverse_lazy("users:index")
+    success_message = _("Пользователь успешно удален")
+    extra_context = {
+        "title": _("Удаление пользователя"),
+        "button_text": _("Да, удалить"),
+    }
+    
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(
+                request,
+                _("Невозможно удалить пользователя, потому что он используется")
+            )
+            return redirect(self.success_url)
+
+"""
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
@@ -104,3 +132,4 @@ class UserDeleteView(
             return redirect(self.success_url)
 
         return super().dispatch(request, *args, **kwargs)
+"""
