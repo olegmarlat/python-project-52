@@ -109,19 +109,12 @@ class UserUpdateView(
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
-    # ProtectedObjectMixin,
     DeleteView
 ):
     model = User
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
-    permission_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
-    access_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
     extra_context = {
         "title": _("Удаление пользователя"),
         "button_text": _("Да, удалить"),
@@ -130,9 +123,12 @@ class UserDeleteView(
     def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         
-        # Нельзя удалить самого себя
-        if user == request.user:
-            messages.error(request, _("Вы не можете удалить свой аккаунт"))
+        # Проверяем только авторство задач
+        if Task.objects.filter(author=user).exists():
+            messages.error(
+                request,
+                _("Невозможно удалить пользователя, потому что он используется")
+            )
             return redirect(self.success_url)
         
         return super().dispatch(request, *args, **kwargs)
