@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="container mt-4">
-  <h2>Удалить задачу "{{ task.name }}"?</h2>
+  <h1>Удалить задачу "{{ task.name }}"?</h1>
   <p>Это действие нельзя отменить.</p>
   <form method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <input class="btn btn-danger" type="submit" value="{% 'Да, удалить' %}
     <a href="{% url 'tasks:tasks_list' %}" class="btn btn-secondary">Отмена</a>
   </form>
 </div>
