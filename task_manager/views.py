@@ -89,7 +89,7 @@ class UserDeleteView(
     DeleteView
 ):
     model = User
-    template_name = "users/user_confirm_delete.html"
+    template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
     permission_denied_message = _(
