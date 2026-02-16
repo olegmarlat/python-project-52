@@ -130,7 +130,7 @@ class UserDeleteView(
     
 
     
-    def dispatch(self, request, *args, **kwargs):
+    """ def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         
         if Task.objects.filter(Q(author=user) | Q(executor=user)).exists():
@@ -141,4 +141,21 @@ class UserDeleteView(
             return redirect(reverse_lazy('users'))
             # return redirect(self.success_url)
         
+        return super().dispatch(request, *args, **kwargs)"""
+    
+        def dispatch(self, request, *args, **kwargs):
+        user = self.get_object()
+        
+        if Task.objects.filter(Q(author=user) | Q(executor=user)).exists():
+            messages.error(
+                request,
+                _("Невозможно удалить пользователя, потому что он используется")
+            )
+
+            return redirect(reverse_lazy('users:index'))
+
+        if request.method == 'GET':
+            return self.post(request, *args, **kwargs)
+            
         return super().dispatch(request, *args, **kwargs)
+
