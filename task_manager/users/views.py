@@ -124,6 +124,11 @@ class UserDeleteView(
         "title": _("Удаление пользователя"),
         "button_text": _("Да, удалить"),
     }
+    """проба """
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+    
+
     
     def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
