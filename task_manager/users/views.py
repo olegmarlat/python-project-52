@@ -133,6 +133,7 @@ class UserDeleteView(
                 request,
                 _("Невозможно удалить пользователя, потому что он используется")
             )
-            return redirect(self.success_url)
+            return redirect(reverse_lazy('users'))
+            # return redirect(self.success_url)
         
         return super().dispatch(request, *args, **kwargs)
