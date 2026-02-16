@@ -143,7 +143,7 @@ class UserDeleteView(
         
         return super().dispatch(request, *args, **kwargs)"""
     
-        def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         
         if Task.objects.filter(Q(author=user) | Q(executor=user)).exists():
