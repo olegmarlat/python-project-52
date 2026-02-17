@@ -7,7 +7,7 @@ from .views import (
     StatusDeleteView,
 )
 
-app_name = 'statuses'
+# app_name = 'statuses'
 urlpatterns = [
     path('', StatusListView.as_view(), name='statuses_list'),
     path('create/', StatusCreateView.as_view(), name='status_create'),

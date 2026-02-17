@@ -21,7 +21,7 @@ class StatusCreateView(CreateView):
     model = Status
     template_name = 'statuses/status_form.html'
     fields = ['name']
-    success_url = reverse_lazy('statuses:statuses_list')
+    success_url = reverse_lazy('statuses_list')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -33,7 +33,7 @@ class StatusUpdateView(UpdateView):
     model = Status
     template_name = 'statuses/status_form.html'
     fields = ['name']
-    success_url = reverse_lazy('statuses:statuses_list')
+    success_url = reverse_lazy('statuses_list')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -44,7 +44,7 @@ class StatusUpdateView(UpdateView):
 class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/status_confirm_delete.html'
-    success_url = reverse_lazy('statuses:statuses_list')
+    success_url = reverse_lazy('statuses_list')
 
     def post(self, request, *args, **kwargs):
         try:
@@ -56,7 +56,7 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
                 self.request,
                 "Невозможно удалить статус, потому что он используется"
             )
-            return redirect('statuses:statuses_list')
+            return redirect('statuses_list')
 
 
 @login_required
@@ -74,7 +74,7 @@ def status_create(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Статус успешно создан!")
-            return redirect("statuses:statuses_list")
+            return redirect("statuses_list")
     else:
         form = StatusForm()
     return render(request, "statuses/status_form.html", {"form": form})
@@ -88,7 +88,7 @@ def status_update(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Статус успешно изменен!")
-            return redirect("statuses:statuses_list")
+            return redirect("statuses_list")
     else:
         form = StatusForm(instance=status)
     return render(request, "statuses/status_form.html", {"form": form})
@@ -101,10 +101,10 @@ def status_delete(request, pk):
         try:
             status.delete()
             messages.success(request, "Статус успешно удален!")
-            return redirect("statuses:statuses_list")
+            return redirect("statuses_list")
         except ProtectedError:
             messages.error(request, "Невозможно удалить статус")
-            return redirect("statuses:statuses_list")
+            return redirect("statuses_list")
     return render(
         request, "statuses/status_confirm_delete.html", {"status": status}
     )

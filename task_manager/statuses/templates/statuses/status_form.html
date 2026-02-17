@@ -11,6 +11,6 @@
     <button type="submit" class="btn btn-primary">
       {% if form.instance.pk %}Изменить{% else %}Создать{% endif %}
     </button>
-    <a href="{% url 'statuses:statuses_list' %}" class="btn btn-secondary">Отмена</a>
+    <a href="{% url 'statuses_list' %}" class="btn btn-secondary">Отмена</a>
   </form>
 {% endblock %}

@@ -27,7 +27,7 @@ class AuthorRequiredMixin:
         task = self.get_object()
         if task.author != request.user:
             messages.error(request, 'Задачу может удалить только ее автор')
-            return redirect('tasks:tasks_list')
+            return redirect('tasks_list')
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -35,7 +35,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     template_name = 'tasks/task_form.html'
     fields = ['name', 'description', 'status', 'executor', 'labels']
-    success_url = reverse_lazy('tasks:tasks_list')
+    success_url = reverse_lazy('tasks_list')
     login_url = 'login'
 
     def form_valid(self, form):
@@ -49,7 +49,7 @@ class TaskUpdateView(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
     model = Task
     template_name = 'tasks/task_form.html'
     fields = ['name', 'description', 'status', 'executor', 'labels']
-    success_url = reverse_lazy('tasks:tasks_list')
+    success_url = reverse_lazy('tasks_list')
     login_url = 'login'
 
     def form_valid(self, form):
@@ -61,7 +61,7 @@ class TaskUpdateView(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
 class TaskDeleteView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     model = Task
     template_name = 'tasks/task_confirm_delete.html'
-    success_url = reverse_lazy('tasks:tasks_list')
+    success_url = reverse_lazy('tasks_list')
     login_url = 'login'
 
     def form_valid(self, form):
