@@ -9,8 +9,7 @@
     
     <p>Вы уверены, что хотите удалить пользователя "{{ object.username }}"?</p>
 
-</form>
-    <form method="post" action="{% 'users:delete' user_obj.id %}">
+    <form method="post" action="{% url 'users:delete' user_obj.id %}">
         {% csrf_token %}
         <button type="submit" class="btn btn-outline-danger">Да, удалить</button>
     </form>
