@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
 from django_filters.views import FilterView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
