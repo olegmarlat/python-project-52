@@ -6,7 +6,7 @@ from .views import (
     TaskDeleteView,
 )
 
-app_name = 'tasks'
+# app_name = 'tasks'
 
 urlpatterns = [
     path("", TaskListView.as_view(), name="tasks_list"),
