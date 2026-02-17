@@ -107,7 +107,6 @@ class UserUpdateView(
     def get_form_class(self):
         from .forms import UserUpdateForm
         return UserUpdateForm
-from django.db.models import ProtectedError
 
 
 class UserDeleteView(
