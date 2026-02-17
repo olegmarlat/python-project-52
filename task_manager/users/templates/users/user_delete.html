@@ -12,12 +12,7 @@
 </form>
     <form method="post" action="{% 'users:delete' user_obj.id %}">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-danger">Удалить</button>
-    </form>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Да, удалить</button>
-        <a href="{% url 'users:index' %}" class="btn btn-secondary">Отмена</a>
+        <button type="submit" class="btn btn-outline-danger">Да, удалить</button>
     </form>
 </div>
 {% endblock %}
