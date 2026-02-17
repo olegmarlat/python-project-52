@@ -110,7 +110,6 @@ class UserUpdateView(
 from django.db.models import ProtectedError
 
 
-
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
@@ -120,42 +119,22 @@ class UserDeleteView(
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
-    extra_context = {
-        "title": _("Удаление пользователя"),
-        "button_text": _("Да, удалить"),
-    }
-    """проба """
-    def get(self, request, *args, **kwargs):
-        return self.post(request, *args, **kwargs)
-    
 
-    
-    """ def dispatch(self, request, *args, **kwargs):
-        user = self.get_object()
-        
-        if Task.objects.filter(Q(author=user) | Q(executor=user)).exists():
-            messages.error(
-                request,
-                _("Невозможно удалить пользователя, потому что он используется")
-            )
-            return redirect(reverse_lazy('users'))
-            # return redirect(self.success_url)
-        
-        return super().dispatch(request, *args, **kwargs)"""
-    
     def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         
+        # Проверка прав (нельзя удалять чужого юзера)
+        if request.user.id != user.id:
+            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            return redirect("users:index")
+
+        # Проверка связанных задач
         if Task.objects.filter(Q(author=user) | Q(executor=user)).exists():
             messages.error(
                 request,
                 _("Невозможно удалить пользователя, потому что он используется")
             )
-
-            return redirect(reverse_lazy('users:index'))
-
-        if request.method == 'GET':
-            return self.post(request, *args, **kwargs)
-            
+            return redirect("users:index")
+        
         return super().dispatch(request, *args, **kwargs)
 
