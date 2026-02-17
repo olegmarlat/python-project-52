@@ -16,7 +16,6 @@ from django.views import View
 from django.contrib import messages
 from task_manager.mixins import (
     LoginRequiredMessageMixin,
-    ProtectedObjectMixin,
 )
 
 User = get_user_model()

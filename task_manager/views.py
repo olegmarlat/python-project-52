@@ -13,9 +13,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.db.models import ProtectedError, Q
-from task_manager.tasks.models import Task
-
+from django.db.models.deletion import ProtectedError
 
 User = get_user_model()
 
@@ -96,13 +94,14 @@ class UserDeleteView(
         "title": _("Удаление пользователя"),
         "button_text": _("Да, удалить"),
     }
-    
+
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
         except ProtectedError:
             messages.error(
                 request,
-                _("Невозможно удалить пользователя, потому что он используется")
+                _("Невозможно удалить пользователя,"
+                  "потому что он используется")
             )
             return redirect(self.success_url)
