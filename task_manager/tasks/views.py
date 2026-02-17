@@ -27,7 +27,7 @@ class AuthorRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         task = self.get_object()
         if task.author != request.user:
-            messages.error(request, 'У вас нет прав для изменения этой задачи')
+            messages.error(request, 'Задачу может удалить только ее автор')
             return redirect('tasks:tasks_list')
         return super().dispatch(request, *args, **kwargs)
 
