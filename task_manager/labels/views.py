@@ -33,8 +33,11 @@ class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = 'Метка успешно удалена'
 
     def post(self, request, *args, **kwargs):
-        try:
-            return super().post(request, *args, **kwargs)
-        except ProtectedError:
-            messages.error(self.request, 'Невозможно удалить метку, потому что она используется')
+        self.object = self.get_object()
+        # Проверяем, есть ли задачи, использующие эту метку
+        if self.object.task_set.exists():
+            messages.error(self.request, 'Невозможно удалить метку')
             return redirect('labels:label_list')
+        
+        return super().post(request, *args, **kwargs)
+
