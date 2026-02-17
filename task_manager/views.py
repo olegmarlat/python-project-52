@@ -17,7 +17,6 @@ from django.db.models import ProtectedError, Q
 from task_manager.tasks.models import Task
 
 
-
 User = get_user_model()
 
 USERS_INDEX_URL = "users:index"
@@ -83,11 +82,6 @@ class UserUpdateView(
         "button_text": _("Изменить"),
     }
 
-
-
-
-# task_manager/users/views.py
-from django.db.models import ProtectedError
 
 class UserDeleteView(
     LoginRequiredMixin,
