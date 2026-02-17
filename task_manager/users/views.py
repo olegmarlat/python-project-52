@@ -124,7 +124,10 @@ class UserDeleteView(
         
         # Проверка прав (нельзя удалять чужого юзера)
         if request.user.id != user.id:
-            messages.error(request, _("У вас нет прав для изменения другого пользователя."))
+            messages.error(
+                request,
+                _("У вас нет прав для изменения другого пользователя.")
+            )
             return redirect("users:index")
 
         # Проверка связанных задач
