@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="my-4">Задачи</h1>
     
-    <a href="{% url 'create' %}" class="btn btn-primary mb-3">Создать задачу</a>
+    <a href="{% url 'task_create' %}" class="btn btn-primary mb-3">Создать задачу</a>
 
     
     <form method="get" class="mb-4" id="task-filters">
@@ -69,9 +69,9 @@
                 </td>
                 <td class="col-1">{{ task.created_at|date:"d.m.Y H:i" }}</td>
                 <td class="col-1">
-                    <a href="{% url 'update' task.id %}">Изменить</a>
+                    <a href="{% url 'task_update' task.id %}">Изменить</a>
                     <br>
-                    <a href="{% url 'delete' task.id %}">Удалить</a>
+                    <a href="{% url 'task_delete' task.id %}">Удалить</a>
                 </td>
             </tr>
             {% empty %}
