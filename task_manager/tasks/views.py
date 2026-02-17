@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
 from django_filters.views import FilterView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Task
 from .filters import TaskFilter
+from django.shortcuts import redirect
 
 
 class TaskListView(LoginRequiredMixin, FilterView):
@@ -26,8 +26,8 @@ class AuthorRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         task = self.get_object()
         if task.author != request.user:
-            messages.error(request, 'У вас нет прав для изменения этой задачи')
-            raise PermissionDenied
+            messages.error(request, 'Задачу может удалить только ее автор')
+            return redirect('tasks:tasks_list')
         return super().dispatch(request, *args, **kwargs)
 
 

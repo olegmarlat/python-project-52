@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.db.models import ProtectedError
 from .models import Status
@@ -39,16 +41,22 @@ class StatusUpdateView(UpdateView):
         return response
 
 
-class StatusDeleteView(DeleteView):
+class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/status_confirm_delete.html'
-    fields = ['name']
     success_url = reverse_lazy('statuses:statuses_list')
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        messages.success(self.request, 'Статус успешно удален')
-        return response
+    def post(self, request, *args, **kwargs):
+        try:
+            response = super().post(request, *args, **kwargs)
+            messages.success(self.request, "Статус успешно удален")
+            return response
+        except ProtectedError:
+            messages.error(
+                self.request,
+                "Невозможно удалить статус, потому что он используется"
+            )
+            return redirect('statuses:statuses_list')
 
 
 @login_required

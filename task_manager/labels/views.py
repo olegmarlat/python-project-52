@@ -1,45 +1,46 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect
 from .models import Label
 
 
-class LabelListView(ListView):
+class LabelListView(LoginRequiredMixin, ListView):
     model = Label
     template_name = 'labels/label_list.html'
     context_object_name = 'labels'
 
 
-class LabelCreateView(CreateView):
+class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Label
     template_name = 'labels/label_form.html'
     fields = ['name']
     success_url = reverse_lazy('labels:label_list')
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        messages.success(self.request, 'Метка успешно создана')
-        return response
+    success_message = 'Метка успешно создана'
 
 
-class LabelUpdateView(UpdateView):
+class LabelUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Label
     template_name = 'labels/label_form.html'
     fields = ['name']
     success_url = reverse_lazy('labels:label_list')
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        messages.success(self.request, 'Метка успешно изменена')
-        return response
+    success_message = 'Метка успешно изменена'
 
 
-class LabelDeleteView(DeleteView):
+class LabelDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Label
     template_name = 'labels/label_delete.html'
     success_url = reverse_lazy('labels:label_list')
+    success_message = 'Метка успешно удалена'
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        messages.success(self.request, 'Метка успешно удалена')
-        return response
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # Проверяем, есть ли задачи, использующие эту метку
+        if self.object.task_set.exists():
+            messages.error(self.request, 'Невозможно удалить метку')
+            return redirect('labels:label_list')
+        
+        return super().post(request, *args, **kwargs)
+

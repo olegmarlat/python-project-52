@@ -1,5 +1,4 @@
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import (
@@ -8,6 +7,8 @@ from django.views.generic import (
     DeleteView,
     ListView,
 )
+from django.db.models import Q
+from task_manager.tasks.models import Task
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -109,31 +110,31 @@ class UserUpdateView(
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
-    # ProtectedObjectMixin,
     DeleteView
 ):
     model = User
     template_name = "users/user_delete.html"
     success_url = reverse_lazy("users:index")
     success_message = _("Пользователь успешно удален")
-    permission_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
-    access_denied_message = _(
-        "У вас нет прав для изменения другого пользователя."
-    )
-    extra_context = {
-        "title": _("Удаление пользователя"),
-        "button_text": _("Да, удалить"),
-    }
-    
+
     def dispatch(self, request, *args, **kwargs):
         user = self.get_object()
         
-        # Нельзя удалить самого себя
-        if user == request.user:
-            messages.error(request, _("Вы не можете удалить свой аккаунт"))
-            return redirect(self.success_url)
+        # Проверка прав (нельзя удалять чужого юзера)
+        if request.user.id != user.id:
+            messages.error(
+                request,
+                _("У вас нет прав для изменения другого пользователя.")
+            )
+            return redirect("users:index")
+
+        # Проверка связанных задач
+        if Task.objects.filter(Q(author=user) | Q(executor=user)).exists():
+            messages.error(
+                request,
+                _("Невозможно удалить пользователя, потому что он используется")
+            )
+            return redirect("users:index")
         
         return super().dispatch(request, *args, **kwargs)
 
