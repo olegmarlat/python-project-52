@@ -80,6 +80,7 @@ class UserUpdateView(
         "button_text": _("Изменить"),
     }
 
+
 class UserDeleteView(
     LoginRequiredMixin,
     SuccessMessageMixin,
