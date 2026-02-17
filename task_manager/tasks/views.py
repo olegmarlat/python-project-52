@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Task
 from .filters import TaskFilter
+from django.shortcuts import redirect
 
 
 class TaskListView(LoginRequiredMixin, FilterView):
@@ -27,7 +28,7 @@ class AuthorRequiredMixin:
         task = self.get_object()
         if task.author != request.user:
             messages.error(request, 'У вас нет прав для изменения этой задачи')
-            raise PermissionDenied
+            return redirect('tasks:tasks_list')
         return super().dispatch(request, *args, **kwargs)
 
 
