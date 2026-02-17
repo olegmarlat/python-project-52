@@ -32,6 +32,8 @@ build-backend = "hatchling.build"
 packages = ["task_manager"]
 
 [tool.pytest.ini_options]
+django_find_project = true
 DJANGO_SETTINGS_MODULE = "task_manager.settings"
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
-addopts = "-ra -p no:pytest_env"
+addopts = "-ra" 
+
