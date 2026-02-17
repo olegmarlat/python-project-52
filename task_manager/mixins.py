@@ -58,7 +58,9 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 class ProtectErrorMixin:
 
     protected_object_url = None
-    protected_object_message = _("This object cannot be deleted because it is in use.")
+    protected_object_message = _(
+        "This object cannot be deleted because it is in use."
+    )
 
     def post(self, request, *args, **kwargs):
         try:
