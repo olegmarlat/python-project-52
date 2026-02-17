@@ -31,7 +31,10 @@ class ProtectedObjectMixin:
         from task_manager.tasks.models import Task
 
         # Проверяем обе связи
-        if obj.created_tasks.exists() or Task.objects.filter(executor=obj).exists():
+        if (
+            obj.created_tasks.exists() or
+            Task.objects.filter(executor=obj).exists()
+        ):
             messages.error(request, self.protected_object_message)
             return redirect(self.protected_object_url)
 
