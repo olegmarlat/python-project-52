@@ -53,7 +53,8 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             return response
         except ProtectedError:
             messages.error(self.request,
-                           "Невозможно удалить статус, потому что он используется")
+                           "Невозможно удалить статус, потому что он используется"
+            )
             return redirect('statuses:statuses_list')
 
 
