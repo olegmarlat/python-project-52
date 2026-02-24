@@ -11,8 +11,9 @@
         <a href="{% url 'logout' %}" class="btn btn-primary">Выйти</a>
     {% else %}
         <p>Пожалуйста, войдите в систему для продолжения</p>
-        <a href="{% url 'login' %}" class="btn btn-primary">Вход</a>
-        <a href="{% url 'register' %}" class="btn btn-secondary">Регистрация</a>
+    
+        <!-- <a href="{% url 'login' %}" class="btn btn-primary">Вход</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Регистрация</a> -->
     {% endif %}
 </div>
 {% endblock %}
