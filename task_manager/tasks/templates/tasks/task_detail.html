@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">{{ task.name }}</h1>
+    
+    <p><strong>Описание:</strong> {{ task.description|default:"-" }}</p>
+    <p><strong>Статус:</strong> {{ task.status }}</p>
+    <p><strong>Автор:</strong> {{ task.author }}</p>
+    <p><strong>Исполнитель:</strong> {{ task.executor|default:"Не назначен" }}</p>
+    <p><strong>Метки:</strong> 
+        {% for label in task.labels.all %}
+            {{ label.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            -
+        {% endfor %}
+    </p>
+    <p><strong>Дата создания:</strong> {{ task.created_at|date:"d.m.Y H:i" }}</p>
+    
+    <a href="{% url 'task_update' task.id %}" class="btn btn-primary">Изменить</a>
+    <a href="{% url 'tasks_list' %}" class="btn btn-secondary">Назад</a>
+</div>
+{% endblock %}

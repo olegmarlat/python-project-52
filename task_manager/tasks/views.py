@@ -6,6 +6,7 @@ from django.contrib import messages
 from .models import Task
 from .filters import TaskFilter
 from django.shortcuts import redirect
+from django.views.generic import DetailView
 
 
 class TaskListView(LoginRequiredMixin, FilterView):
@@ -68,3 +69,9 @@ class TaskDeleteView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
         response = super().form_valid(form)
         messages.success(self.request, 'Задача успешно удалена')
         return response
+
+
+class TaskDetailView(DetailView):
+    model = Task
+    template_name = 'tasks/task_detail.html'
+    context_object_name = 'task'
