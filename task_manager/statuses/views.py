@@ -54,4 +54,3 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
                 "Невозможно удалить статус, потому что он используется"
             )
             return redirect('statuses_list')
-
