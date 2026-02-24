@@ -9,10 +9,6 @@
     {% csrf_token %}
     {% bootstrap_form form %}
     {% bootstrap_button button_type="submit" content="Создать" button_class="btn-primary" %}
-    <a href="{% url'status_list' %} class="btn btn-secondary">Отмена</a>
-    <!-- <button type="submit" class="btn btn-primary">
-      {% if form.instance.pk %}Изменить{% else %}Создать{% endif %}
-    </button>
-    <a href="{% url 'statuses_list' %}" class="btn btn-secondary">Отмена</a> -->
+    <a href="{% url 'status_list' %}" class="btn btn-secondary">Отмена</a>
   </form>
 {% endblock %}
