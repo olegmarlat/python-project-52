@@ -21,7 +21,7 @@ class StatusCreateView(CreateView):
     model = Status
     template_name = 'statuses/status_form.html'
     fields = ['name']
-    success_url = reverse_lazy('statuses_list')
+    success_url = reverse_lazy('status_list')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -33,7 +33,7 @@ class StatusUpdateView(UpdateView):
     model = Status
     template_name = 'statuses/status_form.html'
     fields = ['name']
-    success_url = reverse_lazy('statuses_list')
+    success_url = reverse_lazy('status_list')
 
     def form_valid(self, form):
         response = super().form_valid(form)
