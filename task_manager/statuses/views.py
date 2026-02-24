@@ -41,7 +41,7 @@ class StatusUpdateView(UpdateView):
 class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Status
     template_name = 'statuses/status_confirm_delete.html'
-    success_url = reverse_lazy('statuses_list')
+    success_url = reverse_lazy('status_list')  # ← ИСПРАВЛЕНО: было 'statuses_list'
 
     def post(self, request, *args, **kwargs):
         try:
@@ -53,5 +53,4 @@ class StatusDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
                 self.request,
                 "Невозможно удалить статус, потому что он используется"
             )
-            return redirect('statuses_list')
-
+            return redirect('status_list')  # ← ИСПРАВЛЕНО: было 'statuses_list'
