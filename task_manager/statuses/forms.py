@@ -12,6 +12,6 @@ class StatusForm(forms.ModelForm):
         widgets = {
             'name':forms.TextInput(attrs={
                 'class':'form-control',
-                'placeholder':"Введите имя статуса'
+                'placeholder':"Введите имя статуса"
             }),
         }
