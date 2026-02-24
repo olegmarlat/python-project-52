@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container mt-4">
-  <h2>Удалить задачу "{{ task.name }}"?</h2>
+  <h2>Удалить задачу "{{ object.name }}"?</h2>
   <p>Это действие нельзя отменить.</p>
   <form method="post">
     {% csrf_token %}
