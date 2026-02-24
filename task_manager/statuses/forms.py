@@ -9,3 +9,9 @@ class StatusForm(forms.ModelForm):
         labels = {
             "name": "Имя",
         }
+        widgets = {
+            'name':forms.TextInput(attrs={
+                'class':'form-control',
+                'placeholder':"Введите имя статуса'
+            }),
+        }
