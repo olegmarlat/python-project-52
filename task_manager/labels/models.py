@@ -11,9 +11,9 @@ class Label(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = _("Метка")
         verbose_name_plural = _("Метки")
+
+    def __str__(self):
+        return self.name
