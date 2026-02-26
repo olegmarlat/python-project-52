@@ -1,9 +1,9 @@
 from django.apps import AppConfig
+from django.conf import settings
 from django.contrib.auth.signals import user_logged_in
 from django.contrib.messages import success
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from django.conf import settings
 
 
 @receiver(user_logged_in)

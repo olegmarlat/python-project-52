@@ -27,8 +27,9 @@ select = [
 ]
 
 ignore = [
-    "E501",   # line length (пусть работает Black/форматтер)
-    "DJ001",  # Django nullable string field (иногда нужно)
+    "E501",
+    "DJ001",
+    "PT009",
 ]
 
 # Настройки сортировки импортов

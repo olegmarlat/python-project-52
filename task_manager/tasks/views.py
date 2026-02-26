@@ -1,12 +1,12 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django_filters.views import FilterView
-from django.views.generic import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import Task
-from .filters import TaskFilter
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.views.generic import DetailView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django_filters.views import FilterView
+
+from .filters import TaskFilter
+from .models import Task
 
 
 class TaskListView(LoginRequiredMixin, FilterView):

@@ -2,8 +2,9 @@
 """Django's command-line utility for administrative tasks."""
 
 import os
-from dotenv import load_dotenv
 import sys
+
+from dotenv import load_dotenv
 
 load_dotenv()
 

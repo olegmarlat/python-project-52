@@ -1,22 +1,23 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from django.views import View
 from django.views.generic import (
     CreateView,
-    UpdateView,
     DeleteView,
     ListView,
+    UpdateView,
 )
-from django.db.models import Q
-from task_manager.tasks.models import Task
-from django.contrib.auth import get_user_model, authenticate, login, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
-from django.views import View
-from django.contrib import messages
+
 from task_manager.mixins import (
     LoginRequiredMessageMixin,
 )
+from task_manager.tasks.models import Task
 
 User = get_user_model()
 

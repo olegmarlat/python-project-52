@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext as _
 
 User = get_user_model()
 
