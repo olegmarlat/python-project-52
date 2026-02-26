@@ -1,0 +1,43 @@
+target-version = "py312"
+
+# Исключения (не проверять)
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "__pycache__",
+    "migrations",
+    "staticfiles",
+    "node_modules",
+    ".coverage",
+    "coverage.xml",
+    "htmlcov",
+]
+
+# Настройки линтера
+[lint]
+select = [
+    "E",      # pycodestyle errors
+    "F",      # pyflakes
+    "I",      # isort (импорты)
+    "UP",     # pyupgrade
+    "DJ",     # Django best practices
+    "PT",     # pytest style
+    "SIM",    # simplify code
+]
+
+ignore = [
+    "E501",   # line length (пусть работает Black/форматтер)
+    "DJ001",  # Django nullable string field (иногда нужно)
+]
+
+# Настройки сортировки импортов
+[lint.isort]
+known-first-party = ["task_manager"]  # имя вашего проекта
+known-third-party = ["django", "pytest", "coverage"]
+
+# Настройки форматирования
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
