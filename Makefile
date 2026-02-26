@@ -36,7 +36,8 @@ test:
 	uv run pytest --ds=$(SETTINGS) --reuse-db -xvs
 
 coverage:
-	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=$(SETTINGS) --reuse-db
+	# uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=$(SETTINGS) --reuse-db
+	uv run coverage run --source=. --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=$(SETTINGS)
 	uv run coverage report --show-missing --skip-covered
 	uv run coverage html
 

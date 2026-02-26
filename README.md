@@ -6,6 +6,8 @@
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=olegmarlat_python-project-52&metric=coverage)](https://sonarcloud.io/summary/new_code?id=olegmarlat_python-project-52)
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=olegmarlat_python-project-52&metric=coverage)](https://sonarcloud.io/dashboard?id=olegmarlat_python-project-52)
+
 # Менеджер задач
 ### Описание проекта
 
